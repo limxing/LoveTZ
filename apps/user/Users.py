@@ -55,7 +55,7 @@ class Users(object):
                 print('获取token',token)
                 if token is None:
                     return json.dumps(Result(201, '请重新登录', None))
-                mi = json.loads("{\"token\":\"" + token + "\",\"appId\":"+str(appId)+"}")
+                mi = json.loads("{\"token\":\"" + str(token) + "\",\"appId\":"+str(appId)+"}")
             user_db.mitoken = mi
             base = json.dumps(Result(200, 'success', json.loads(UserSchema().dumps(user_db).data)).json())
 
@@ -69,7 +69,7 @@ class Users(object):
         req = requests.post(url, data=req_json, headers=headers)
         result = json.loads(req.content.decode('utf-8'))
         if result['message'] == 'success':
-            token = result['data']['token']
+            token = result['data']
             return token
         else:
             return None

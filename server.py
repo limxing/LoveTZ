@@ -12,14 +12,13 @@ from binascii import b2a_hex, a2b_hex
 
 @app.before_request
 def before_request():
-    if 'me.leefeng.easymaimai' not in request.headers['User-Agent']:
+    if request.method != 'POST' or 'me.leefeng.easymaimai' not in request.headers['User-Agent']:
         return '非法请求'
     try:
-        request.headers['Apptype']
+        # request.headers['Apptype']
+        print("接收请求：", request.headers['Apptype'])
     except:
         return '非法请求'
-
-
 
 
 @app.after_request
