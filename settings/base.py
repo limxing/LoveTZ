@@ -15,4 +15,5 @@ class BaseConfig(Config):
     UPLOADED_PHOTO_DEST = os.path.join(BASEDIR,'upload')
     UPLOADED_PHOTO_ALLOW = IMAGES
     WTF_CSRF_ENABLED = False #全局禁用表单提交的防攻击验证
+    SQLALCHEMY_POOL_RECYCLE = 7200
 
