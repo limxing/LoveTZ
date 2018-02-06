@@ -12,7 +12,8 @@ logger = logging.getLogger(__name__)
 
 
 def load_config():
-    mode = os.environ.get('MODE')
+    # mode = os.environ.get('MODE')
+    mode = 'PRODUCTION'
     try:
         if mode == 'PRODUCTION':
             from .production import ProductionConfig
