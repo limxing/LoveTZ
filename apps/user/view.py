@@ -9,7 +9,12 @@ def index():
 
 @mod.route('/login',methods=['POST','GET'])
 def login():
+    isIos = False
+    try:
+        isIos = request.headers['Apptype'] == 'IOS'
+    except:
+        pass
 
-    return Users().login(request.values,request.headers['Apptype']=='IOS')
+    return Users().login(request.values,isIos)
 
 
