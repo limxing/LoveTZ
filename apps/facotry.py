@@ -23,6 +23,9 @@ def create_app():
     app.register_blueprint(main_mod)
     from apps.user.view import mod as user_mod
     app.register_blueprint(user_mod)
+    from apps.fund.view import mod as fund_mod
+    app.register_blueprint(fund_mod)
+
     #解析json
     ma.init_app(app)
     #上传图片配置
