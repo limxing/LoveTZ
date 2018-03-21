@@ -22,6 +22,8 @@ class Funds:
     @staticmethod
     def savefund(dic: CombinedMultiDict):
         code = str(dic.get('fund_code'))
+        if code == '' or code is None:
+            return json.dumps(Result(402, '基金代码不能为空', None).json())
         fund_db = db.session.query(Fund).filter_by(fund_code=code).first()
         if fund_db is None:
             fund_db = Fund()
