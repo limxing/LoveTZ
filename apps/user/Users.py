@@ -30,15 +30,19 @@ class Users(object):
             return json.dumps(Result(201, '请输入手机号码再请求', None).json())
         if re.compile('^1[3,4,5,7,8]\d{9}$').match(phone) is None:
             return json.dumps(Result(201, '请输入正确手机号码再请求', None).json())
-        # with db.session.no_autoflush:
+
         user_db = db.session.query(User).filter_by(phone=phone).first()
-        # db.session.rollback()
+
         if user_db is None:
             user_db = User()
             user_db.phone = phone
             user_db.time_creat = datetime.now()
-            db.session.add(user_db)
-            db.session.commit()
+            try:
+                db.session.add(user_db)
+                db.session.commit()
+            except:
+                db.session.rollback()
+                return json.dumps(Result(501, '登录失败，重新登录', None))
 
         mi = json.loads("{\"appId\":" + str(
             appId) + ",\"appKey\":\"" + appKey + "\",\"appSecret\":\"" + appSecret + "\",\"url\":\"" + url + "\"}")
