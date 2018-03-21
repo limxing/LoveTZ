@@ -39,10 +39,19 @@ class Funds:
                 db.session.commit()
             except Exception as e:
                 db.session.rollback()
-                return json.dumps(Result(500, 'success', str(e)).json())
+                return json.dumps(Result(500, '添加失败'+code, str(e)).json())
             return json.dumps(Result(200, 'success', json.loads(FundSchema().dumps(fund_db).data)).json())
         else:
-            return json.dumps(Result(201, '已经存在:'+code+'的记录', None).json())
+            try:
+                fund_db.mixamt = dic.get('mixamt')
+                fund_db.maxamt = dic.get('maxamt')
+                fund_db.feeratio = dic.get('feeratio')
+                db.session.commit()
+            except Exception as e:
+                db.session.rollback()
+                return json.dumps(Result(500, '更新失败'+code, str(e)).json())
+
+            return json.dumps(Result(200, '更新成功:'+code, None).json())
 
 
 class FundSchema(ma.ModelSchema):
