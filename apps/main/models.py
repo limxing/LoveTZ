@@ -14,3 +14,17 @@ class User(db.Model):
     time_creat = db.Column(db.DateTime)
     password = db.Column(db.String(64))
     mitoken = db.Column(db.JSON)
+
+class Fund(db.Model):
+    def gen_id(self):
+        return uuid.uuid4().hex
+
+    __tablename__ = 'fund'
+    uuid = db.Column(db.String(32), default=gen_id, primary_key=True)
+    time_creat = db.Column(db.DateTime)
+    time_update = db.Column(db.DateTime)
+    fund_name = db.Column(db.String(64))
+    fund_code = db.Column(db.String(64))
+    mixamt = db.Column(db.Float)#最低申购
+    maxamt = db.Column(db.String(64))#最高申购额
+    feeratio = db.Column(db.Float)#总费率

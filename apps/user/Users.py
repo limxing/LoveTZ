@@ -1,4 +1,6 @@
 from werkzeug.datastructures import CombinedMultiDict
+
+from apps.main.Result import Result
 from apps.main.models import User
 from apps.core import db
 from datetime import datetime
@@ -19,17 +21,9 @@ appKeyIOS = "5301770927315"
 appSecretIOS = "7dFzuIqT0uyvtJKOm3OnXg=="
 
 
-class Result:
-    def __init__(self, code, msg, data):
-        self.code = code
-        self.msg = msg
-        self.data = data
-
-    def json(self):
-        return {"code": self.code, "msg": self.msg, "data": self.data}
-
 
 class Users(object):
+
     def login(self, dic: CombinedMultiDict, isIOS=False):
         phone = dic.get('phone')
         if phone is None:
