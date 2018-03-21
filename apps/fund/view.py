@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, session, request, jsonify
 from apps.fund.Funds import Funds
 
-mod = Blueprint('user', __name__, url_prefix='/fund', template_folder='templates')
+mod = Blueprint('fund', __name__, url_prefix='/fund', template_folder='templates')
 
 
 @mod.route('/')
