@@ -12,7 +12,7 @@ class Funds:
 
     @staticmethod
     def getfund(dic: CombinedMultiDict):
-        code = str(dic.get('code'))
+        code = str(dic.get('fund_code'))
         fund_db = db.session.query(Fund).filter_by(fund_code=code).first()
         if fund_db is None:
             return json.dumps(Result(401, '不存在:' + code + '的记录', None).json())
@@ -21,7 +21,7 @@ class Funds:
 
     @staticmethod
     def savefund(dic: CombinedMultiDict):
-        code = dic.get('fund_code')
+        code = str(dic.get('fund_code'))
         fund_db = db.session.query(Fund).filter_by(fund_code=code).first()
         if fund_db is None:
             fund_db = Fund()
