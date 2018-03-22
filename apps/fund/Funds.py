@@ -21,7 +21,7 @@ class Funds:
         else:
 
             # return json.dumps(Result(200, 'success', json.loads(FundSchema().dumps(fund_db).data)).json())
-            return Result(200, 'success', json.loads(FundSchema().dumps(fund_db).data)).__dict__
+            return Result(200, 'success', FundSchema().dumps(fund_db).data).__dict__
 
 
     @staticmethod
@@ -51,6 +51,7 @@ class Funds:
                 fund_db.mixamt = dic.get('mixamt')
                 fund_db.maxamt = dic.get('maxamt')
                 fund_db.feeratio = dic.get('feeratio')
+                fund_db.time_update = datetime.now()
                 db.session.commit()
             except Exception as e:
                 db.session.rollback()
