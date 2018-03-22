@@ -21,7 +21,7 @@ class Funds:
         else:
 
             # return json.dumps(Result(200, 'success', json.loads(FundSchema().dumps(fund_db).data)).json())
-            return Result(200, 'success', FundSchema().dumps(fund_db).data).__dict__
+            return Result(200, 'success', json.loads(FundSchema().dumps(fund_db).data)).__dict__
 
 
     @staticmethod
