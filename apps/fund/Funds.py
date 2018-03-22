@@ -21,14 +21,14 @@ class Funds:
         else:
 
             # return json.dumps(Result(200, 'success', json.loads(FundSchema().dumps(fund_db).data)).json())
-            # return Result(200, 'success', json.loads(FundSchema().dumps(fund_db).data)).__dict__
-            return Result(200, 'success', fund_db.json).__dict__
+            return Result(200, 'success', json.loads(FundSchema().dumps(fund_db).data)).__dict__
+
 
     @staticmethod
     def savefund(dic: CombinedMultiDict):
         code = str(dic.get('fund_code'))
         if code == '' or code is None:
-            return json.dumps(Result(402, '基金代码不能为空', None).json())
+            return Result(402, '基金代码不能为空', None).__dict__
         fund_db = db.session.query(Fund).filter_by(fund_code=code).first()
         if fund_db is None:
             fund_db = Fund()
@@ -44,8 +44,8 @@ class Funds:
                 db.session.commit()
             except Exception as e:
                 db.session.rollback()
-                return json.dumps(Result(500, '添加失败'+code, str(e)).json())
-            return json.dumps(Result(200, 'success', json.loads(FundSchema().dumps(fund_db).data)).json())
+                return Result(500, '添加失败'+code, str(e)).__dict__
+            return Result(200, 'success', json.loads(FundSchema().dumps(fund_db).data)).__dict__
         else:
             try:
                 fund_db.mixamt = dic.get('mixamt')
@@ -54,9 +54,9 @@ class Funds:
                 db.session.commit()
             except Exception as e:
                 db.session.rollback()
-                return json.dumps(Result(500, '更新失败'+code, str(e)).json())
+                return Result(500, '更新失败'+code, str(e)).__dict__
 
-            return json.dumps(Result(200, '更新成功:'+code, None).json())
+            return Result(200, '更新成功:'+code, None).__dict__
 
 
 class FundSchema(ma.ModelSchema):

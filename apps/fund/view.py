@@ -18,6 +18,6 @@ def get():
 @mod.route('/save', methods=['POST', 'GET'])
 def save():
 
-    return Funds.savefund(request.values)
+    return jsonify(Funds.savefund(request.values))
 
 
