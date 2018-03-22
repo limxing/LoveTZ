@@ -15,12 +15,14 @@ class Funds:
         code = str(dic.get('fund_code'))
         fund_db = db.session.query(Fund).filter_by(fund_code=code).first()
         if fund_db is None:
+
             return Result(401, '不存在:' + code + '的记录', None).__dict__
             # return json.dumps(Result(401, '不存在:' + code + '的记录', None).json())
         else:
 
             # return json.dumps(Result(200, 'success', json.loads(FundSchema().dumps(fund_db).data)).json())
-            return Result(200, 'success', json.loads(FundSchema().dumps(fund_db).data)).__dict__
+            # return Result(200, 'success', json.loads(FundSchema().dumps(fund_db).data)).__dict__
+            return Result(200, 'success', fund_db.json).__dict__
 
     @staticmethod
     def savefund(dic: CombinedMultiDict):
