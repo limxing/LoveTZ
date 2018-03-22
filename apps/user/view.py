@@ -5,7 +5,7 @@ mod = Blueprint('user', __name__, url_prefix='/user', template_folder='templates
 
 @mod.route('/')
 def index():
-    return '欢迎使用买卖不求人APP'
+    return '欢迎访问有恒数据库'
 
 @mod.route('/login',methods=['POST','GET'])
 def login():

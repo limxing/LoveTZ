@@ -5,5 +5,5 @@ mod = Blueprint('main', __name__, url_prefix='', template_folder='templates')
 
 @mod.route('/')
 def index():
-    return '欢迎使用买卖不求人APP'
+    return '欢迎访问有恒数据库'
 
