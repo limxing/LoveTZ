@@ -12,7 +12,7 @@ def index():
 @mod.route('/get', methods=['POST', 'GET'])
 def get():
 
-    return Funds.getfund(request.values)
+    return jsonify(Funds.getfund(request.values))
 
 
 @mod.route('/save', methods=['POST', 'GET'])
