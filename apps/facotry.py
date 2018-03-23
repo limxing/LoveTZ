@@ -14,6 +14,8 @@ def create_app():
 
     # 数据库
     db.init_app(app)
+    with app.app_context():
+        db.metadata.bind = db.engine
     app.app_context().push()
     # with app.app_context():
     #     db.create_all()
