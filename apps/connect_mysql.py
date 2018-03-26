@@ -1,7 +1,8 @@
 import datetime
-# from server import app
-
+from apps.facotry import app
+from .core import db
 
 def connect():
-
-    print('调用了',datetime.datetime.now())
+    with app.app_context():
+        db.session.rollback()
+        print(datetime.datetime.now(),'定时任务，回滚链接一下数据库')

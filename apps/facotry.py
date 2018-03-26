@@ -3,14 +3,14 @@ from flask_uploads import configure_uploads
 
 from settings import load_config
 from .core import db, migrate, ma, photos
-
+import datetime
 from flask_wtf.csrf import CSRFProtect
 from flask_apscheduler import APScheduler
-
+app = Flask(__name__, instance_relative_config=True)
 
 def create_app():
     # app配置
-    app = Flask(__name__, instance_relative_config=True)
+
     config = load_config()
     app.config.from_object(config)
 
