@@ -12,5 +12,4 @@ marshmallow-sqlalchemy==0.13.2
 flask-uploads==0.2.1
 pycrypto==2.6.1
 Flask-APScheduler==1.8.0
-uwsgi-2.0.17
 APScheduler==3.5.1
