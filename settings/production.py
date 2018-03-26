@@ -17,7 +17,7 @@ class ProductionConfig(BaseConfig):
             'func': 'apps.connect_mysql:connect',
             'args': None,
             'trigger': 'interval',
-            'seconds': 5
-            # 'hours': 5
+            # 'seconds': 5
+            'hours': 5
         }
     ]

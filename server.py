@@ -4,7 +4,6 @@ from flask.wrappers import Response
 
 app = create_app()
 isAES = False
-
 import base64
 from Crypto.Cipher import AES
 from binascii import b2a_hex, a2b_hex
