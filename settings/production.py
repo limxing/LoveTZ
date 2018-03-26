@@ -11,3 +11,13 @@ class ProductionConfig(BaseConfig):
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     DEBUG = False
     ASSETS_DEBUG = False
+    JOBS = [
+        {
+            'id': 'sqlconnect_hasgone',
+            'func': 'apps.connect_mysql:connect',
+            'args': None,
+            'trigger': 'interval',
+            'seconds': 5
+            # 'hours': 5
+        }
+    ]
