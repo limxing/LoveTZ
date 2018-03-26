@@ -5,6 +5,8 @@ from settings import load_config
 from .core import db, migrate, ma, photos
 
 from flask_wtf.csrf import CSRFProtect
+from flask_apscheduler import APScheduler
+
 
 def create_app():
     # app配置
@@ -14,8 +16,8 @@ def create_app():
 
     # 数据库
     db.init_app(app)
-    with app.app_context():
-        db.metadata.bind = db.engine
+    # with app.app_context():#无法解决 mysql connect has gone
+    #     db.metadata.bind = db.engine
     app.app_context().push()
     # with app.app_context():
     #     db.create_all()
@@ -34,4 +36,9 @@ def create_app():
     configure_uploads(app, photos)
     # flask内置的保护机制,每次请求需要带上密钥，因此关闭它，
     # CSRFProtect(app)
+    scheduler = APScheduler()
+    scheduler.init_app(app)
+    scheduler.start()
     return app
+
+
