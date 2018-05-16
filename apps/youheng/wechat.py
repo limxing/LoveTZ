@@ -11,7 +11,6 @@ bot = Bot(cache_path=True, console_qr=True)
 
 qun = bot.groups().search('微信机器人')[0]
 
-
 def talks_robot(info='你叫什么名字'):
     api_url = 'http://www.tuling123.com/openapi/api'
     apikey = '2e313f2e75fd48d7b3356f73e579fdc9'
@@ -29,18 +28,18 @@ def print_others(msg):
 
         print('msg.member.isNone', msg.text, msg.type, msg.id, msg.sender)
     else:
-        print('print_others', msg.text, msg.type, msg.id, msg.__dict__)
-        print(msg.__dict__['raw'])
+        # print('print_others', msg.text, msg.type, msg.id, msg.__dict__)
+        # print(msg.__dict__['raw'])
         text = msg.text
+        print(text)
         if '邀请' in text and '加入群聊' in text:
             print(text)
             print(text.split('"'))
             msg.reply('欢迎')
-        if msg.is_at:
+        if '@有恒' in text:
 
-            print(type(text))
             if '佣金图' in text:
-                msg.reply_image('yongjintu.jpeg')
+                msg.reply_image('./yongjintu.jpeg')
             # print("收到消息" + text)
             # first = 0
             # at = text.index('@')

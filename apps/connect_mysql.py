@@ -14,7 +14,7 @@ def morning():
     with app.app_context():
         duYao = db.session.query(YouhengDuyao).filter_by(isSend=False).first()
 
-        qun.send(duYao.text+ '各位晚安')
+        qun.send(duYao.text+ '各位早安 /:sun')
         duYao.isSend = True
         db.session.commit()
     print("执行 早上任务")
@@ -23,7 +23,7 @@ def night():
     with app.app_context():
         duYao = db.session.query(YouhengDuyao).filter_by(isSend=False).first()
 
-        qun.send(duYao.text + '各位晚安')
+        qun.send(duYao.text + '\n各位晚安 /:moon')
         duYao.isSend = True
         db.session.commit()
     print("执行 晚上任务")
