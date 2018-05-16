@@ -19,5 +19,23 @@ class ProductionConfig(BaseConfig):
             'trigger': 'interval',
             # 'seconds': 5
             'hours': 5
+        },
+        {
+            'id': 'youheng_night',
+            'func': 'apps.connect_mysql:night',
+            'args': None,
+            'trigger': 'cron',
+            'hour': 19,
+            'minute' : 54,
+            'second' : 40
+        },
+        {
+            'id': 'youheng_',
+            'func': 'apps.connect_mysql:morning',
+            'args': None,
+            'trigger': 'cron',
+            'hour': 8,
+            'minute': 0,
+            'second': 0
         }
     ]

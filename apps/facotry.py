@@ -30,6 +30,9 @@ def create_app():
     from apps.fund.view import mod as fund_mod
     app.register_blueprint(fund_mod)
 
+    from apps.youheng.view import mod as youheng_mod
+    app.register_blueprint(youheng_mod)
+
     #解析json
     ma.init_app(app)
     #上传图片配置

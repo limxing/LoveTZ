@@ -28,3 +28,13 @@ class Fund(db.Model):
     mixamt = db.Column(db.Float)#最低申购
     maxamt = db.Column(db.String(64))#最高申购额
     feeratio = db.Column(db.Float)#总费率
+
+
+class YouhengDuyao(db.Model):
+    def gen_id(self):
+        return uuid.uuid4().hex
+
+    __tablename__ = 'youeheng_duyao'
+    uuid = db.Column(db.String(32), default=gen_id, primary_key=True)
+    text = db.Column(db.Text)
+    isSend = db.Column(db.Boolean)
