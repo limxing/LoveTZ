@@ -3,7 +3,7 @@ from apps.facotry import app
 from .core import db
 
 from apps.main.models import YouhengDuyao
-
+from apps.youheng.wechat import qun
 
 def connect():
     with app.app_context():
@@ -11,7 +11,7 @@ def connect():
 
 def morning():
     with app.app_context():
-        duYao = db.session.query(YouhengDuyao).filter_by(isSend=False).first()
+        duYao = db.session.query(YouhengDuyao).filter_by(isSend=False,type=0).first()
 
         qun.send(duYao.text+ '\n各位早安/:sun')
         duYao.isSend = True
@@ -20,7 +20,7 @@ def morning():
 
 def night():
     with app.app_context():
-        duYao = db.session.query(YouhengDuyao).filter_by(isSend=False).first()
+        duYao = db.session.query(YouhengDuyao).filter_by(isSend=False,type=1).first()
 
         qun.send(duYao.text + '\n各位晚安 /:moon')
         duYao.isSend = True

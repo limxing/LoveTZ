@@ -2,8 +2,6 @@ from apps.core import db
 import uuid
 
 
-
-
 class User(db.Model):
     def gen_id(self):
         return uuid.uuid4().hex
@@ -14,6 +12,7 @@ class User(db.Model):
     time_creat = db.Column(db.DateTime)
     password = db.Column(db.String(64))
     mitoken = db.Column(db.JSON)
+
 
 class Fund(db.Model):
     def gen_id(self):
@@ -30,6 +29,21 @@ class Fund(db.Model):
     feeratio = db.Column(db.Float)#总费率
 
 
+# class YouhengDuyaoType(db.Model):
+#
+#     __tablename__ = 'youheng_duyao_type'
+#     uuid = db.Column(primary_key=True)
+#     name = db.Column(db.String(64))
+class Question(db.Model):
+    def gen_id(self):
+        return uuid.uuid4().hex
+
+    __tablename__ = 'youheng_question'
+    uuid = db.Column(db.String(32), default=gen_id, primary_key=True)
+    key = db.Column(db.Text)
+    result = db.Column(db.Text)
+
+
 class YouhengDuyao(db.Model):
     def gen_id(self):
         return uuid.uuid4().hex
@@ -38,3 +52,6 @@ class YouhengDuyao(db.Model):
     uuid = db.Column(db.String(32), default=gen_id, primary_key=True)
     text = db.Column(db.Text)
     isSend = db.Column(db.Boolean)
+    type = db.Column(db.Integer)
+    # type = db.relationship('YouhengDuyaoType')
+    # type = db.Column(db.Integer, db.ForeignKey('YouhengDuyaoType.uuid'))

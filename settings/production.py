@@ -25,17 +25,17 @@ class ProductionConfig(BaseConfig):
             'func': 'apps.connect_mysql:night',
             'args': None,
             'trigger': 'cron',
-            'hour': 21,
-            'minute': 0,
-            'second': 0
+            'hour': 16,
+            'minute': 14,
+            'second': 50
         },
         {
             'id': 'youheng_morning',
             'func': 'apps.connect_mysql:morning',
             'args': None,
             'trigger': 'cron',
-            'hour': 8,
-            'minute': 0,
+            'hour': 16,
+            'minute': 16,
             'second': 0
         }
     ]
