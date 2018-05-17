@@ -28,7 +28,7 @@ def start():
     nrows = table.nrows  # 获取表的行数
     for i in range(nrows):  # 循环逐行打印
 
-        text = table.row_values(i)[0]
+        text = table.row_values(i)[0].replace('\n', '')
         if text.strip():
             if text.find('【') != -1:
                 youheng = YouhengDuyao()
