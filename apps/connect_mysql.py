@@ -20,6 +20,7 @@ def morning():
 
 def night():
     with app.app_context():
+
         duYao = db.session.query(YouhengDuyao).filter_by(isSend=False,type=1).first()
 
         qun.send(duYao.text + '\n各位晚安 /:moon')

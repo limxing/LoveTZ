@@ -42,6 +42,7 @@ class Question(db.Model):
     uuid = db.Column(db.String(32), default=gen_id, primary_key=True)
     key = db.Column(db.Text)
     result = db.Column(db.Text)
+    image = db.Column(db.String(128))
 
 
 class YouhengDuyao(db.Model):

@@ -19,7 +19,7 @@ def login():
 
 
 import xlrd
-from apps.main.models import YouhengDuyao
+from apps.main.models import YouhengDuyao,Question
 from apps.core import db
 
 
@@ -27,7 +27,26 @@ from apps.core import db
 def wechat():
     return '<html><body><img src=\"./QR.png\"/></body></html>'
 
-@mod.route('/leefeng', methods=['POST', 'GET'])
+@mod.route('/leefeng_question')
+def question():
+    data = xlrd.open_workbook('./有恒社区文案库.xlsx')
+    table = data.sheets()[2]
+    for i in range(table.nrows):
+        print(table.row_values(i))
+        key = table.row_values(i)[0]
+        print(key)
+        if key.strip():
+            q = Question()
+            q.key = key
+            q.result = table.row_values(i)[1]
+            if len(table.row_values(i)) > 2:
+                q.image = table.row_values(i)[2]
+            db.session.add(q)
+    db.session.commit()
+    return 'finish'
+
+
+@mod.route('/leefeng_duyao', methods=['POST', 'GET'])
 def start():
     data = xlrd.open_workbook('./鸡汤文案收集.xlsx')
     tables = data.sheets()

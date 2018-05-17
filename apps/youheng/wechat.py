@@ -4,6 +4,9 @@ import requests
 
 from wxpy import *
 import time
+from apps.facotry import app
+from apps.core import db
+from apps.main.models import Question
 
 # bot = Bot(console_qr=True)
 bot = Bot(cache_path=True, console_qr=True)
@@ -46,6 +49,16 @@ def print_others(msg):
                 msg.reply_image('./huiyuanzhengce.jpeg')
             if '佣金结算' in text or '案例' in text:
                 msg.reply_image('./anli.jpeg')
+            with app.app_context():
+                text = text.replace('@有恒', '').replace(' ', '')
+                question = Question.query.filter(Question.key.like('%'+text+'%')).first()
+                print(question.key,question.result)
+                if question:
+                    msg.reply(question.result.replace('\\n', '\n'))
+                    if question.image:
+                        msg.reply_image('./images/'+question.image)
+
+                # db.session.query(Question).filter(Question.key.like('%'+text+'%')).first()
             # print("收到消息" + text)
             # first = 0
             # at = text.index('@')
