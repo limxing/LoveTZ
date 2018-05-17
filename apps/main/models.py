@@ -34,7 +34,7 @@ class YouhengDuyao(db.Model):
     def gen_id(self):
         return uuid.uuid4().hex
 
-    __tablename__ = 'youeheng_duyao'
+    __tablename__ = 'youheng_duyao'
     uuid = db.Column(db.String(32), default=gen_id, primary_key=True)
     text = db.Column(db.Text)
     isSend = db.Column(db.Boolean)
