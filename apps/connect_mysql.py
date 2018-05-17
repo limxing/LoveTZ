@@ -2,7 +2,6 @@ import datetime
 from apps.facotry import app
 from .core import db
 
-from apps.youheng.wechat import bot,qun
 from apps.main.models import YouhengDuyao
 
 

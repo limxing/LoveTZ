@@ -17,7 +17,7 @@ def login():
 
     return 'haha'
 
-from apps.youheng import wechat
+
 import xlrd
 from apps.main.models import YouhengDuyao
 from apps.core import db

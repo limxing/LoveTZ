@@ -13,3 +13,5 @@ flask-uploads==0.2.1
 pycrypto==2.6.1
 Flask-APScheduler==1.8.0
 APScheduler==3.5.1
+wxpy==0.3.9.8
+xlrd==1.1.0
