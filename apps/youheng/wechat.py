@@ -6,7 +6,7 @@ from wxpy import *
 import time
 from apps.facotry import app
 from apps.core import db
-from apps.main.models import Question
+from apps.main.models import Question,Ask
 
 # bot = Bot(console_qr=True)
 bot = Bot(cache_path=True, console_qr=True)
@@ -52,12 +52,19 @@ def print_others(msg):
             with app.app_context():
                 text = text.replace('@有恒', '').replace(' ', '')
                 question = Question.query.filter(Question.key.like('%'+text+'%')).first()
-                print(question.key,question.result)
+
                 if question:
+                    print(question.key, question.result)
                     msg.reply(question.result.replace('\\n', '\n'))
                     if question.image:
                         msg.reply_image('./images/'+question.image)
-
+                else:
+                    print('保存',text)
+                    # msg.reply('抱歉，我还没有搜索到相关问题的答案')
+                    a = Ask()
+                    a.key = text
+                    db.session.add(a)
+                    db.session.commit()
                 # db.session.query(Question).filter(Question.key.like('%'+text+'%')).first()
             # print("收到消息" + text)
             # first = 0

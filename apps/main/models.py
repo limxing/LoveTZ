@@ -34,6 +34,17 @@ class Fund(db.Model):
 #     __tablename__ = 'youheng_duyao_type'
 #     uuid = db.Column(primary_key=True)
 #     name = db.Column(db.String(64))
+class Ask(db.Model):
+    def gen_id(self):
+        return uuid.uuid4().hex
+
+    __tablename__ = 'youheng_ask'
+    uuid = db.Column(db.String(32), default=gen_id, primary_key=True)
+    key = db.Column(db.Text)
+    result = db.Column(db.Text)
+    image = db.Column(db.String(128))
+
+
 class Question(db.Model):
     def gen_id(self):
         return uuid.uuid4().hex
