@@ -54,7 +54,7 @@ def print_others(msg):
                 question = Question.query.filter(Question.question.like('%'+text+'%')).first()
 
                 if question:
-                    print(question.key, question.result)
+                    print(question.question, question.result)
                     msg.reply(question.result.replace('\\n', '\n'))
                     if question.image:
                         msg.reply_image('./images/'+question.image)
