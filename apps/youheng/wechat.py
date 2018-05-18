@@ -51,7 +51,7 @@ def print_others(msg):
                 msg.reply_image('./anli.jpeg')
             with app.app_context():
                 text = text.replace('@有恒', '').replace(' ', '')
-                question = Question.query.filter(Question.key.like('%'+text+'%')).first()
+                question = Question.query.filter(Question.question.like('%'+text+'%')).first()
 
                 if question:
                     print(question.key, question.result)

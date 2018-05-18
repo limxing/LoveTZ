@@ -51,7 +51,7 @@ class Question(db.Model):
 
     __tablename__ = 'youheng_question'
     uuid = db.Column(db.String(32), default=gen_id, primary_key=True)
-    key = db.Column(db.Text)
+    question = db.Column(db.Text)
     result = db.Column(db.Text)
     image = db.Column(db.String(128))
 
