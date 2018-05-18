@@ -37,7 +37,7 @@ def question():
         print(key)
         if key.strip():
             q = Question()
-            q.key = key
+            q.question = table.row_values(i)[0]
             q.result = table.row_values(i)[1]
             if len(table.row_values(i)) > 2:
                 q.image = table.row_values(i)[2]
