@@ -12,7 +12,7 @@ from apps.main.models import Question,Ask
 bot = Bot(cache_path=True, console_qr=True)
 # my_friend = bot.friends().search('妖怪哪里跑')[0]
 
-qun = bot.groups().search('有恒APP')[0]
+qun = bot.groups().search('微信机器人')[0]
 
 
 def talks_robot(info='你叫什么名字'):
