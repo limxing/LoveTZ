@@ -21,7 +21,7 @@ qun = bot.groups().search('有恒APP')[0]
 # qun = bot.groups().search('微信机器人')[0]
 
 
-def talks_robot(info='你叫什么名字'):
+def talks_robot(info='北京天气'):
     api_url = 'http://www.tuling123.com/openapi/api'
     apikey = '2e313f2e75fd48d7b3356f73e579fdc9'
     data = {'key': apikey,
@@ -41,6 +41,7 @@ def print_others(msg):
         # print('print_others', msg.text, msg.type, msg.id, msg.__dict__)
         logging.log(logging.INFO, msg.raw)
         text = msg.text
+        ActualNickName = msg.raw.get('ActualNickName')
         # if '邀请' in text and '加入群聊' in text:
         #     print(text)
         #     print(text.split('"'))
@@ -59,7 +60,7 @@ def print_others(msg):
                 if len(text) < 3 and text.isdigit():
                     question = Question.query.filter(Question.uuid == int(text)).first()
                     if question.result:
-                        msg.reply(question.question+'\n'+question.result.replace('\\n', '\n'))
+                        msg.reply('@' + ActualNickName + ' \n' + question.question+'\n'+question.result.replace('\\n', '\n'))
                     if question.image:
                         msg.reply_image('./images/'+question.image)
                     return
@@ -79,15 +80,15 @@ def print_others(msg):
                     question = questions[0]
                     # print(question.question, question.result)
                     if question.result:
-                        msg.reply(question.question+'\n'+question.result.replace('\\n', '\n'))
+                        msg.reply('@' + ActualNickName + ' \n'+question.question+'\n'+question.result.replace('\\n', '\n'))
                     if question.image:
                         msg.reply_image('./images/'+question.image)
                     return
                 if len(questions) > 1:
-                    s = ''
+                    s = '@' + ActualNickName + ' \n'
                     for q in questions:
                         s += str(q.uuid) + '、'+q.question +'\n'
-                    s += '请选择问题序号。例如：@有恒 '+ str(questions[0].uuid)
+                    s += '请选择问题序号。例如：@有恒 ' + str(questions[0].uuid)
                     msg.reply(s)
                     return
                 if '天气' in text:
