@@ -46,11 +46,11 @@ class Ask(db.Model):
 
 
 class Question(db.Model):
-    def gen_id(self):
-        return uuid.uuid4().hex
+    # def gen_id(self):
+    #     return uuid.uuid4().hex
 
     __tablename__ = 'youheng_question'
-    uuid = db.Column(db.String(32), default=gen_id, primary_key=True)
+    uuid = db.Column(db.Integer, primary_key=True)
     question = db.Column(db.Text)
     result = db.Column(db.Text)
     image = db.Column(db.String(128))

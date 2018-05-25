@@ -13,7 +13,7 @@ def morning():
     with app.app_context():
         duYao = db.session.query(YouhengDuyao).filter_by(isSend=False,type=0).first()
 
-        qun.send(duYao.text+ '\n各位早安/:sun')
+        qun.send(duYao.text + '\n各位早安/:sun')
         duYao.isSend = True
         db.session.commit()
     print("执行 早上任务")

@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, session, request, jsonify
-
+import jieba.analyse
+from sqlalchemy import or_, and_
 
 mod = Blueprint('youheng', __name__, url_prefix='/youheng', template_folder='templates')
 
@@ -26,6 +27,25 @@ from apps.core import db
 @mod.route('/wechat')
 def wechat():
     return '<html><body><img src=\"./QR.png\"/></body></html>'
+
+@mod.route('/search')
+def search():
+    key = request.values['key']
+    if key is None:
+        return '您没有查询任何关键字'
+    else:
+        words = jieba.analyse.extract_tags(key)
+        or_clause = []
+        for w in words:
+            or_clause.append(Question.question.like('%' + w + '%'))
+
+        or_filter = and_(*or_clause)
+
+        question = Question.query.filter(or_filter).first()
+
+        return question.result, words
+
+
 
 @mod.route('/leefeng_question')
 def question():

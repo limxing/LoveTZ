@@ -7,12 +7,16 @@ import time
 from apps.facotry import app
 from apps.core import db
 from apps.main.models import Question,Ask
+import jieba.analyse
+from sqlalchemy import or_, and_
 
 # bot = Bot(console_qr=True)
 bot = Bot(cache_path=True, console_qr=True)
+
 # my_friend = bot.friends().search('妖怪哪里跑')[0]
 
-qun = bot.groups().search('有恒APP')[0]
+# qun = bot.groups().search('有恒APP')[0]
+qun = bot.groups().search('微信机器人')[0]
 
 
 def talks_robot(info='你叫什么名字'):
@@ -22,7 +26,7 @@ def talks_robot(info='你叫什么名字'):
             'info': info}
     req = requests.post(api_url, data=data).text
     replys = json.loads(req)['text']
-    time.sleep(1)
+    # time.sleep(1)
     return replys
 
 
@@ -51,20 +55,44 @@ def print_others(msg):
                 msg.reply_image('./anli.jpeg')
             with app.app_context():
                 text = text.replace('@有恒', '').replace(' ', '')
-                question = Question.query.filter(Question.question.like('%'+text+'%')).first()
+                # question = Question.query.filter(Question.question.like('%'+text+'%')).first()
+                words = jieba.analyse.extract_tags(text)
+                print(words)
+                or_clause = []
+                for w in words:
+                    if '什么' in w or '怎么' in w or '如何' in w :
+                        continue
+                    or_clause.append(Question.question.like('%' + w + '%'))
 
-                if question:
+                or_filter = or_(*or_clause)
+
+                questions = Question.query.filter(or_filter).all()
+
+                if len(questions) == 1:
+                    question = questions[0]
                     print(question.question, question.result)
-                    msg.reply(question.result.replace('\\n', '\n'))
+                    if question.result:
+                        msg.reply(question.result.replace('\\n', '\n'))
                     if question.image:
                         msg.reply_image('./images/'+question.image)
-                else:
-                    print('保存',text)
-                    # msg.reply('抱歉，我还没有搜索到相关问题的答案')
-                    a = Ask()
-                    a.key = text
-                    db.session.add(a)
-                    db.session.commit()
+                    return
+                if len(questions) > 1:
+                    s = ''
+                    for q in questions:
+                        s += q.question +'\n'
+                    s += '请选择问题序号'
+                    msg.reply(s)
+                # if '天气' in text:
+                #     msg.reply(talks_robot("天气"))
+                # else:
+                #     print('保存', text)
+                #     # msg.reply('抱歉，我还没有搜索到相关问题的答案')
+                #     a = Ask()
+                #     a.key = text
+                #     db.session.add(a)
+                #     db.session.commit()
+
+
                 # db.session.query(Question).filter(Question.key.like('%'+text+'%')).first()
             # print("收到消息" + text)
             # first = 0
