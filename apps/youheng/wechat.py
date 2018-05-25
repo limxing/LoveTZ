@@ -17,8 +17,8 @@ bot = Bot(cache_path=True, console_qr=True)
 
 # my_friend = bot.friends().search('妖怪哪里跑')[0]
 
-# qun = bot.groups().search('有恒APP')[0]
-qun = bot.groups().search('微信机器人')[0]
+qun = bot.groups().search('有恒APP')[0]
+# qun = bot.groups().search('微信机器人')[0]
 
 
 def talks_robot(info='你叫什么名字'):
@@ -87,7 +87,7 @@ def print_others(msg):
                     s = ''
                     for q in questions:
                         s += str(q.uuid) + '、'+q.question +'\n'
-                    s += '请选择问题序号。例如：@有恒 1'
+                    s += '请选择问题序号。例如：@有恒 '+ str(questions[0].uuid)
                     msg.reply(s)
                     return
                 if '天气' in text:
