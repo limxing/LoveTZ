@@ -46,7 +46,6 @@ def search():
         return question.result, words
 
 
-
 @mod.route('/leefeng_question')
 def question():
     data = xlrd.open_workbook('./有恒社区文案库.xlsx')

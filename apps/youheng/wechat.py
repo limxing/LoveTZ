@@ -56,14 +56,16 @@ def print_others(msg):
             # if '佣金结算' in text or '案例' in text:
             #     msg.reply_image('./anli.jpeg')
             with app.app_context():
-                text = text.replace('@有恒', '').replace(' ', '')
-                if len(text) < 3 and text.isdigit():
+                text = text.replace('@有恒', '').strip()
+                logging.log(logging.INFO, '收到消息：' + text)
+                if text.isdigit():
                     question = Question.query.filter(Question.uuid == int(text)).first()
-                    if question.result:
-                        msg.reply('@' + ActualNickName + ' \n' + question.question+'\n'+question.result.replace('\\n', '\n'))
-                    if question.image:
-                        msg.reply_image('./images/'+question.image)
-                    return
+                    if question:
+                        if question.result:
+                            msg.reply('@' + ActualNickName + ' \n' + str(question.uuid)+'、'+question.question+'\n'+question.result.replace('\\n', '\n'))
+                        if question.image:
+                            msg.reply_image('./images/'+question.image)
+                        return
                 # question = Question.query.filter(Question.question.like('%'+text+'%')).first()
                 words = jieba.analyse.extract_tags(text)
                 logging.log(logging.INFO, '分词：' + str(words))
