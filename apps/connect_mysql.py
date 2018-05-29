@@ -22,8 +22,8 @@ def night():
     with app.app_context():
 
         duYao = db.session.query(YouhengDuyao).filter_by(isSend=False,type=1).first()
-
-        qun.send(duYao.text + '\n各位晚安 /:moon')
+        for qun in quns:
+            qun.send(duYao.text + '\n各位晚安 /:moon')
         duYao.isSend = True
         db.session.commit()
     print("执行 晚上任务")

@@ -1,13 +1,42 @@
-from flask import Blueprint, render_template, session, request, jsonify
+from flask import Blueprint, render_template, session, request, jsonify,template_rendered
 import jieba.analyse
 from sqlalchemy import or_, and_
 import requests
+from apps.main.models import DuyaoSchema
+import json
+
+from apps.main.Result import Result
 
 mod = Blueprint('youheng', __name__, url_prefix='/youheng', template_folder='templates')
 
 @mod.route('/')
 def index():
-    return '欢迎访问有恒微信自动回复'
+    duYao = db.session.query(YouhengDuyao).all()
+    return render_template('index.html', duyao=duYao)
+
+
+@mod.route('/add',methods=['POST'])
+def add():
+    print('dasdasd')
+    text = request.values['text']
+    type = request.values['type']
+    print(text, type)
+    duyao = YouhengDuyao()
+    duyao.text = text
+    duyao.type = type
+    duyao.isSend = False
+    db.session.add(duyao)
+    db.session.commite()
+
+    return jsonify(Result(200, '', '').__dict__)
+
+
+@mod.route('/questions')
+def questions():
+    isM = request.values['isM']
+    duYao = db.session.query(YouhengDuyao).filter(YouhengDuyao.type==isM).order_by('isSend').all()
+    return jsonify(Result(200, '', json.loads(DuyaoSchema().dumps(duYao, many=True).data)).__dict__)
+
 
 @mod.route('/login',methods=['POST','GET'])
 def login():

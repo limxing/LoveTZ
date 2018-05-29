@@ -19,6 +19,7 @@ bot = Bot(cache_path=True, console_qr=True)
 
 quns = bot.groups().search('有恒')
 # qun = bot.groups().search('微信机器人')[0]
+# quns = bot.groups().search('微信机器人')
 
 
 def talks_robot(info='北京天气'):

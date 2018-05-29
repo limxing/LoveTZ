@@ -26,7 +26,7 @@ class ProductionConfig(BaseConfig):
             'args': None,
             'trigger': 'cron',
             'hour': 21,
-            'minute': 0,
+            'minute': 30,
             'second': 0
         },
         {

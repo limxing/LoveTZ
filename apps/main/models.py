@@ -1,4 +1,4 @@
-from apps.core import db
+from apps.core import db,ma
 import uuid
 
 
@@ -67,3 +67,8 @@ class YouhengDuyao(db.Model):
     type = db.Column(db.Integer)
     # type = db.relationship('YouhengDuyaoType')
     # type = db.Column(db.Integer, db.ForeignKey('YouhengDuyaoType.uuid'))
+
+
+class DuyaoSchema(ma.ModelSchema):
+    class Meta:
+        model = YouhengDuyao
