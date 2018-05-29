@@ -38,7 +38,9 @@ def shortUrl():
     else:
         url = 'http://api.t.sina.com.cn/short_url/shorten.json?source=3271760578&url_long='+url
         json = requests.get(url).json()
-        return json
+        if len(json) > 0:
+            return jsonify(json[0])
+        return '错误'
 
 
 @mod.route('/search')
