@@ -11,13 +11,13 @@ mod = Blueprint('youheng', __name__, url_prefix='/youheng', template_folder='tem
 
 @mod.route('/')
 def index():
-    duYao = db.session.query(YouhengDuyao).all()
-    return render_template('index.html', duyao=duYao)
+    # duYao = db.session.query(YouhengDuyao).all()
+    return render_template('index.html')
 
 
 @mod.route('/add',methods=['POST'])
 def add():
-    print('dasdasd')
+
     text = request.values['text']
     type = request.values['type']
     print(text, type)
@@ -26,8 +26,18 @@ def add():
     duyao.type = type
     duyao.isSend = False
     db.session.add(duyao)
-    db.session.commite()
+    db.session.commit()
 
+    return jsonify(Result(200, '', '').__dict__)
+
+
+@mod.route('/delete')
+def delete():
+    uuid = request.values['uuid']
+    duyao = db.session.query(YouhengDuyao).filter(YouhengDuyao.uuid == uuid).first()
+    if duyao:
+        db.session.delete(duyao)
+        db.session.commit()
     return jsonify(Result(200, '', '').__dict__)
 
 
