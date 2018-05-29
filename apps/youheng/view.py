@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, session, request, jsonify
 import jieba.analyse
 from sqlalchemy import or_, and_
+import requests
 
 mod = Blueprint('youheng', __name__, url_prefix='/youheng', template_folder='templates')
 
@@ -27,6 +28,18 @@ from apps.core import db
 @mod.route('/wechat')
 def wechat():
     return '<html><body><img src=\"./QR.png\"/></body></html>'
+
+
+@mod.route('/shorturl')
+def shortUrl():
+    url = request.values['url']
+    if url is None:
+        return '您没有查询到任何关键字'
+    else:
+        url = 'http://api.t.sina.com.cn/short_url/shorten.json?source=3271760578&url_long='+url
+        json = requests.get(url).json()
+        return json
+
 
 @mod.route('/search')
 def search():

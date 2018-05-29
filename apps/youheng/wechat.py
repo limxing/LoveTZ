@@ -17,7 +17,7 @@ bot = Bot(cache_path=True, console_qr=True)
 
 # my_friend = bot.friends().search('妖怪哪里跑')[0]
 
-qun = bot.groups().search('有恒APP')[0]
+quns = bot.groups().search('有恒')
 # qun = bot.groups().search('微信机器人')[0]
 
 
@@ -39,7 +39,7 @@ def print_others(msg):
         print('msg.member.isNone', msg.text, msg.type, msg.id, msg.sender)
     else:
         # print('print_others', msg.text, msg.type, msg.id, msg.__dict__)
-        logging.log(logging.INFO, msg.raw)
+        # logging.log(logging.INFO, msg.raw)
         text = msg.text
         ActualNickName = msg.raw.get('ActualNickName')
         # if '邀请' in text and '加入群聊' in text:
