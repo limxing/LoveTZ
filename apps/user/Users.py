@@ -36,15 +36,16 @@ class Users(object):
         user_db = db.session.query(User).filter_by(phone=phone).first()
 
         if not user_db:
-            user_db = User()
-            user_db.phone = phone
-            user_db.time_creat = datetime.now()
-            try:
-                db.session.add(user_db)
-                db.session.commit()
-            except:
-                db.session.rollback()
-                return json.dumps(Result(501, '登录失败，重新登录', None))
+            return Result(201,'管理用户不存在','').__dict__
+            # user_db = User()
+            # user_db.phone = phone
+            # user_db.time_creat = datetime.now()
+            # try:
+            #     db.session.add(user_db)
+            #     db.session.commit()
+            # except:
+            #     db.session.rollback()
+            #     return json.dumps(Result(501, '登录失败，重新登录', None))
         token = 'token '+user_db.generate_auth_token().decode('ascii')
 
         mi = json.loads("{\"appId\":" + str(

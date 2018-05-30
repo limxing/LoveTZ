@@ -33,6 +33,7 @@ class YouhengApi(AuthRequest):
     def delete(self):
         print(YouhengDuyao.query.get(request.values['uuid']).delete())
         return jsonify(Result(200, "删除成功", None).__dict__)
+
     def put(self):
 
         duyao = YouhengDuyao.query.get(request.values['uuid'])
