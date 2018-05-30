@@ -36,7 +36,7 @@ class Users(object):
         user_db = db.session.query(User).filter_by(phone=phone).first()
 
         if not user_db:
-            return Result(201, u'管理用户不存在', '').__dict__
+            return Result(201, 'User is not exist', '').__dict__
             # user_db = User()
             # user_db.phone = phone
             # user_db.time_creat = datetime.now()

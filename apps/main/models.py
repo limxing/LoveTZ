@@ -15,7 +15,7 @@ class User(db.Model):
     token = db.Column(db.String(64))
     mitoken = db.Column(db.JSON)
 
-    def generate_auth_token(self, expiration=600):
+    def generate_auth_token(self, expiration=60*60*24):
         s = Serializer('leefeng', expires_in=expiration)
         return s.dumps({'id': self.uuid})
 
