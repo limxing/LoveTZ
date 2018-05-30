@@ -6,7 +6,12 @@ from .core import db, migrate, ma, photos
 import datetime
 from flask_wtf.csrf import CSRFProtect
 from flask_apscheduler import APScheduler
+
+
+from .youheng import api as youheng
+
 app = Flask(__name__, instance_relative_config=True)
+youheng.init_app(app)
 
 def create_app():
     # app配置
@@ -42,6 +47,7 @@ def create_app():
     scheduler = APScheduler()
     scheduler.init_app(app)
     scheduler.start()
+
     return app
 
 

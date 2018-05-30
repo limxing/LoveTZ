@@ -1,15 +1,14 @@
 from werkzeug.datastructures import CombinedMultiDict
 
 from apps.main.Result import Result
-from apps.main.models import User
+from apps.main.models import User,UserSchema
 from apps.core import db
 from datetime import datetime
-from apps.core import ma
 import re
 import copy
 import json
 import requests
-from  marshmallow.schema import MarshalResult
+
 
 appId = 2882303761517709315
 appKey = "5301770927315"
@@ -22,9 +21,12 @@ appSecretIOS = "7dFzuIqT0uyvtJKOm3OnXg=="
 
 
 
+
+
 class Users(object):
 
-    def login(self, dic: CombinedMultiDict, isIOS=False):
+    @staticmethod
+    def login(dic: CombinedMultiDict, isIOS = False):
         phone = dic.get('phone')
         if phone is None:
             return json.dumps(Result(201, '请输入手机号码再请求', None).json())
@@ -33,7 +35,7 @@ class Users(object):
 
         user_db = db.session.query(User).filter_by(phone=phone).first()
 
-        if user_db is None:
+        if not user_db:
             user_db = User()
             user_db.phone = phone
             user_db.time_creat = datetime.now()
@@ -43,6 +45,7 @@ class Users(object):
             except:
                 db.session.rollback()
                 return json.dumps(Result(501, '登录失败，重新登录', None))
+        token = 'token '+user_db.generate_auth_token().decode('ascii')
 
         mi = json.loads("{\"appId\":" + str(
             appId) + ",\"appKey\":\"" + appKey + "\",\"appSecret\":\"" + appSecret + "\",\"url\":\"" + url + "\"}")
@@ -50,19 +53,20 @@ class Users(object):
             mi = json.loads("{\"appId\":" + str(
                 appIdIOS) + ",\"appKey\":\"" + appKeyIOS + "\",\"appSecret\":\"" + appSecretIOS + "\",\"url\":\"" + url + "\"}")
         else:
-            token = self.getMiToken(user_db.uuid)
-            print('获取token',token)
-            if token is None:
+            mitoken = Users.getMiToken(user_db.uuid)
+            if mitoken is None:
                 return json.dumps(Result(201, '请重新登录', None))
-            mi = json.loads("{\"token\":\"" + str(token) + "\",\"appId\":"+str(appId)+"}")
+            mi = json.loads("{\"token\":\"" + str(mitoken) + "\",\"appId\":"+str(appId)+"}")
         user = copy.deepcopy(user_db)
         user.mitoken = mi
-        base = json.dumps(Result(200, 'success', json.loads(UserSchema().dumps(user).data)).json())
+        user.token = token
+        base = Result(200, 'success', json.loads(UserSchema().dumps(user).data)).__dict__
 
         return base
 
     # 获取小米MIpush token
-    def getMiToken(self, appAccount):
+    @staticmethod
+    def getMiToken(appAccount):
         req_json = "{\"appId\":" + str(
             appId) + ",\"appKey\":\"" + appKey + "\",\"appSecret\":\"" + appSecret + "\",\"appAccount\":\"" + appAccount + "\"}"
         headers = {'content-type': 'application/json'}
@@ -75,6 +79,6 @@ class Users(object):
             return None
 
 
-class UserSchema(ma.ModelSchema):
-    class Meta:
-        model = User
+
+
+

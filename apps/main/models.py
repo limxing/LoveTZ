@@ -1,5 +1,6 @@
 from apps.core import db,ma
 import uuid
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer, SignatureExpired, BadSignature
 
 
 class User(db.Model):
@@ -11,7 +12,24 @@ class User(db.Model):
     phone = db.Column(db.String(16))
     time_creat = db.Column(db.DateTime)
     password = db.Column(db.String(64))
+    token = db.Column(db.String(64))
     mitoken = db.Column(db.JSON)
+
+    def generate_auth_token(self, expiration=600):
+        s = Serializer('leefeng', expires_in=expiration)
+        return s.dumps({'id': self.uuid})
+
+    @staticmethod
+    def verify_auth_token(token):
+        s = Serializer('leefeng')
+        try:
+            data = s.loads(token)
+        except SignatureExpired:
+            return None  # valid token, but expired
+        except BadSignature:
+            return None  # invalid token
+        user = User.query.get(data['id'])
+        return user
 
 
 class Fund(db.Model):
@@ -65,10 +83,26 @@ class YouhengDuyao(db.Model):
     text = db.Column(db.Text)
     isSend = db.Column(db.Boolean)
     type = db.Column(db.Integer)
+    time_creat = db.Column(db.DateTime)
+    time_send = db.Column(db.DateTime)
     # type = db.relationship('YouhengDuyaoType')
     # type = db.Column(db.Integer, db.ForeignKey('YouhengDuyaoType.uuid'))
 
+    def add(self):
+        db.session.add(self)
+        db.session.commit()
+    def delete(self):
+
+        db.session.delete(self)
+        db.session.commit()
+    def save(self):
+        db.session.commit()
 
 class DuyaoSchema(ma.ModelSchema):
     class Meta:
         model = YouhengDuyao
+
+
+class UserSchema(ma.ModelSchema):
+    class Meta:
+        model = User

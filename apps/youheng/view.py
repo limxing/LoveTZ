@@ -7,56 +7,11 @@ import json
 
 from apps.main.Result import Result
 
-mod = Blueprint('youheng', __name__, url_prefix='/youheng', template_folder='templates')
+mod = Blueprint('youheng', __name__, url_prefix='/', template_folder='templates')
 
 @mod.route('/')
 def index():
-    # duYao = db.session.query(YouhengDuyao).all()
     return render_template('index.html')
-
-
-@mod.route('/add',methods=['POST'])
-def add():
-
-    text = request.values['text']
-    type = request.values['type']
-    print(text, type)
-    duyao = YouhengDuyao()
-    duyao.text = text
-    duyao.type = type
-    duyao.isSend = False
-    db.session.add(duyao)
-    db.session.commit()
-
-    return jsonify(Result(200, '', '').__dict__)
-
-
-@mod.route('/delete')
-def delete():
-    uuid = request.values['uuid']
-    duyao = db.session.query(YouhengDuyao).filter(YouhengDuyao.uuid == uuid).first()
-    if duyao:
-        db.session.delete(duyao)
-        db.session.commit()
-    return jsonify(Result(200, '', '').__dict__)
-
-
-@mod.route('/questions')
-def questions():
-    isM = request.values['isM']
-    duYao = db.session.query(YouhengDuyao).filter(YouhengDuyao.type==isM).order_by('isSend').all()
-    return jsonify(Result(200, '', json.loads(DuyaoSchema().dumps(duYao, many=True).data)).__dict__)
-
-
-@mod.route('/login',methods=['POST','GET'])
-def login():
-    isIos = False
-    try:
-        isIos = request.headers['Apptype'] == 'IOS'
-    except:
-        pass
-
-    return 'haha'
 
 
 import xlrd
