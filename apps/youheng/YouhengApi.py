@@ -3,7 +3,7 @@ from flask import jsonify,g,request
 from apps.main.Result import Result
 import json
 from apps.base.BaseRequest import BaseRequest,AuthRequest
-from datetime import datetime
+import datetime
 from sqlalchemy import desc
 
 class YouhengApi(AuthRequest):
@@ -25,7 +25,7 @@ class YouhengApi(AuthRequest):
             duyao = YouhengDuyao()
             duyao.text = text
             duyao.type = type
-            duyao.time_creat = datetime.now()
+            duyao.time_creat = datetime.datetime.now()
             duyao.isSend = False
             duyao.add()
             return jsonify(Result(200, "保存成功", None).__dict__)

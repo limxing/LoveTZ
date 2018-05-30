@@ -15,6 +15,7 @@ def morning():
         for qun in quns:
             qun.send(duYao.text + '\n各位早安/:sun')
         duYao.isSend = True
+        duYao.time_send = datetime.datetime.now()
         db.session.commit()
     print("执行 早上任务")
 
@@ -25,5 +26,6 @@ def night():
         for qun in quns:
             qun.send(duYao.text + '\n各位晚安 /:moon')
         duYao.isSend = True
+        duYao.time_send = datetime.datetime.now()
         db.session.commit()
     print("执行 晚上任务")
