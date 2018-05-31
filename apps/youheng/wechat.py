@@ -17,7 +17,7 @@ bot = Bot(cache_path=True, console_qr=True)
 
 # my_friend = bot.friends().search('妖怪哪里跑')[0]
 
-quns = bot.groups().search('有恒')
+
 # qun = bot.groups().search('微信机器人')[0]
 # quns = bot.groups().search('微信机器人')
 

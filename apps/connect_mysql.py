@@ -4,7 +4,7 @@ from .core import db
 import time
 
 from apps.main.models import YouhengDuyao
-from apps.youheng.wechat import quns
+from apps.youheng.wechat import bot
 
 def connect():
     with app.app_context():
@@ -13,6 +13,7 @@ def connect():
 def morning():
     with app.app_context():
         duYao = db.session.query(YouhengDuyao).filter_by(isSend=False, type=0).first()
+        quns = bot.groups().search('有恒')
         for qun in quns:
             qun.send(duYao.text + '\n各位早安/:sun')
             time.sleep(1)
@@ -25,6 +26,7 @@ def night():
     with app.app_context():
 
         duYao = db.session.query(YouhengDuyao).filter_by(isSend=False,type=1).first()
+        quns = bot.groups().search('有恒')
         for qun in quns:
             qun.send(duYao.text + '\n各位晚安 /:moon')
             time.sleep(1)
