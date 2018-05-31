@@ -56,7 +56,7 @@ class Users(object):
         else:
             mitoken = Users.getMiToken(user_db.uuid)
             if mitoken is None:
-                return json.dumps(Result(201, '请重新登录', None))
+                return Result(201, '请重新登录', None).__dict__
             mi = json.loads("{\"token\":\"" + str(mitoken) + "\",\"appId\":"+str(appId)+"}")
         user = copy.deepcopy(user_db)
         user.mitoken = mi
@@ -68,15 +68,18 @@ class Users(object):
     # 获取小米MIpush token
     @staticmethod
     def getMiToken(appAccount):
-        req_json = "{\"appId\":" + str(
-            appId) + ",\"appKey\":\"" + appKey + "\",\"appSecret\":\"" + appSecret + "\",\"appAccount\":\"" + appAccount + "\"}"
-        headers = {'content-type': 'application/json'}
-        req = requests.post(url, data=req_json, headers=headers)
-        result = json.loads(req.content.decode('utf-8'))
-        if result['message'] == 'success':
-            token = result['data']
-            return token
-        else:
+        try:
+            req_json = "{\"appId\":" + str(
+                appId) + ",\"appKey\":\"" + appKey + "\",\"appSecret\":\"" + appSecret + "\",\"appAccount\":\"" + appAccount + "\"}"
+            headers = {'content-type': 'application/json'}
+            req = requests.post(url, data=req_json, headers=headers)
+            result = json.loads(req.content.decode('utf-8'))
+            if result['message'] == 'success':
+                token = result['data']
+                return token
+            else:
+                return None
+        except:
             return None
 
 

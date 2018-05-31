@@ -73,6 +73,16 @@ class Question(db.Model):
     result = db.Column(db.Text)
     image = db.Column(db.String(128))
 
+    def add(self):
+        db.session.add(self)
+        db.session.commit()
+    def delete(self):
+
+        db.session.delete(self)
+        db.session.commit()
+    def save(self):
+        db.session.commit()
+
 
 class YouhengDuyao(db.Model):
     def gen_id(self):
@@ -106,3 +116,7 @@ class DuyaoSchema(ma.ModelSchema):
 class UserSchema(ma.ModelSchema):
     class Meta:
         model = User
+
+class QuestionSchema(ma.ModelSchema):
+    class Meta:
+        model = Question

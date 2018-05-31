@@ -1,11 +1,13 @@
 from flask_restful import Api
 from .YouhengApi import YouhengApi
+from .QuestionApi import QuestionApi
 from apps.core import auth,db
 from flask import g
 from apps.main.models import User
 api = Api()
 
 api.add_resource(YouhengApi, '/duyao')
+api.add_resource(QuestionApi, '/question')
 
 
 @auth.verify_token
