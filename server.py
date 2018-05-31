@@ -57,7 +57,7 @@ def after_request(response):
     # base = bytes.decode(data)
     # print('加密前：', base)
     response.headers['Access-Control-Allow-Origin'] = '*'
-    response.headers['Access-Control-Allow-Headers'] = 'Content-Type,Authorization'
+    response.headers['Access-Control-Allow-Headers'] = '*'
     response.headers['Access-Control-Allow-Methods'] = '*'
 
     return response
