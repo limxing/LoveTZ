@@ -48,6 +48,3 @@ class QuestionApi(AuthRequest):
         question.save()
 
         return jsonify(Result(200, "修改成功", None).__dict__)
-
-    def checkLogin(self):
-        return False
