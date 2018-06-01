@@ -21,12 +21,12 @@ class QuestionApi(AuthRequest):
             return jsonify(Result(201, "填写内容不能为空", None).__dict__)
 
         else:
-            type = request.values['question']
+            title = request.values['question']
             image = request.values['image']
 
             question = Question()
             question.result = result
-            question.question = type
+            question.question = title
             question.image = image
             question.time_creat = datetime.datetime.now()
             question.time_update = datetime.datetime.now()
