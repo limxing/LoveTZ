@@ -11,7 +11,7 @@ class QuestionApi(AuthRequest):
 
     def get(self):
 
-        duYao = Question.query.filter_by().order_by('uuid').all()
+        duYao = Question.query.order_by('uuid').all()
 
         return jsonify(Result(200, '', json.loads(QuestionSchema().dumps(duYao, many=True).data)).__dict__)
 
