@@ -72,6 +72,8 @@ class Question(db.Model):
     question = db.Column(db.Text)
     result = db.Column(db.Text)
     image = db.Column(db.String(128))
+    time_creat = db.Column(db.DateTime)
+    time_update = db.Column(db.DateTime)
 
     def add(self):
         db.session.add(self)

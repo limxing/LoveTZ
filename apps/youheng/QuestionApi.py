@@ -29,12 +29,13 @@ class QuestionApi(AuthRequest):
             question.question = type
             question.image = image
             question.time_creat = datetime.datetime.now()
+            question.time_update = datetime.datetime.now()
 
             question.add()
             return jsonify(Result(200, "保存成功", None).__dict__)
 
     def delete(self):
-        print(Question.query.get(request.values['uuid']).delete())
+        Question.query.get(request.values['uuid']).delete()
         return jsonify(Result(200, "删除成功", None).__dict__)
 
     def put(self):
@@ -43,6 +44,7 @@ class QuestionApi(AuthRequest):
         question.result = request.values['result']
         question.question = request.values['question']
         question.image = request.values['image']
+        question.time_update = datetime.datetime.now()
         question.save()
 
         return jsonify(Result(200, "修改成功", None).__dict__)
