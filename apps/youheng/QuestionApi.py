@@ -16,14 +16,13 @@ class QuestionApi(AuthRequest):
         return jsonify(Result(200, '', json.loads(QuestionSchema().dumps(duYao, many=True).data)).__dict__)
 
     def post(self):
-        result = request.values['result'].strip()
+        result = request.values.get('result').strip()
         if not result:
             return jsonify(Result(201, "填写内容不能为空", None).__dict__)
 
         else:
-            title = request.values['question']
-            image = request.values['image']
-
+            title = request.values.get('question')
+            image = request.values.get('image')
             question = Question()
             question.result = result
             question.question = title
@@ -35,15 +34,15 @@ class QuestionApi(AuthRequest):
             return jsonify(Result(200, "保存成功", None).__dict__)
 
     def delete(self):
-        Question.query.get(request.values['uuid']).delete()
+        Question.query.get(request.values.get('uuid')).delete()
         return jsonify(Result(200, "删除成功", None).__dict__)
 
     def put(self):
 
-        question = Question.query.get(request.values['uuid'])
-        question.result = request.values['result']
-        question.question = request.values['question']
-        question.image = request.values['image']
+        question = Question.query.get(request.values.get('uuid'))
+        question.result = request.values.get('result')
+        question.question = request.values.get('question')
+        question.image = request.values.get('image')
         question.time_update = datetime.datetime.now()
         question.save()
 
