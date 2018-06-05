@@ -69,8 +69,9 @@ def print_others(msg):
                 question = Question.query.filter(Question.uuid == int(text)).first()
                 if question:
                     if question.result:
-                        msg.reply('@' + ActualNickName + ' \n' + str(question.uuid)+'、'+question.question+'\n'+question.result.replace('\\n', '\n'))
+                        msg.reply('@' + ActualNickName + '\u2005\n' + str(question.uuid)+'、'+question.question+'\n'+question.result.replace('\\n', '\n'))
                     if question.image:
+                        msg.reply('@' + ActualNickName + '\u2005')
                         msg.reply_image('./images/'+question.image)
                     return
             # question = Question.query.filter(Question.question.like('%'+text+'%')).first()
