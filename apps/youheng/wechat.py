@@ -46,8 +46,9 @@ def print_others(msg):
     # print(text,msg.type, msg.raw)
     ActualNickName = msg.raw.get('ActualNickName')
     if msg.type == 'Note' and '邀请' in text and '加入了群聊' in text:
-        msg.reply('@' + text.split('\"')[3] + '\u2005\n欢迎加入有恒社区🎉🎉🎉\n为方便群内的交流，请更新个人群名片，格式：名字-级别-ID\n有什么问题可以直接在群里@我。')
-
+        name = text.split('\"')[3]
+        msg.reply('@' + name + '\u2005\n欢迎加入有恒社区🎉🎉🎉\n为方便群内的交流，请更新个人群名片，格式：名字-级别-ID\n有什么问题可以直接在群里@我。')
+        logging.log(logging.INFO, "欢迎加入有恒社区："+name)
     # if '邀请' in text and '加入群聊' in text:
     #     print(text)
     #     print(text.split('"'))
