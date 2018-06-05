@@ -37,12 +37,17 @@ def talks_robot(info='北京天气'):
 def print_others(msg):
     # if msg.member is None:
     #
-    #     print('msg.member.isNone', msg.text, msg.type, msg.id, msg.sender)
+    # print('msg.member.isNone', msg.text, msg.type, msg.id, msg.sender)
+
     # else:
         # print('print_others', msg.text, msg.type, msg.id, msg.__dict__)
         # logging.log(logging.INFO, msg.raw)
     text = msg.text
+    # print(text,msg.type, msg.raw)
     ActualNickName = msg.raw.get('ActualNickName')
+    if msg.type == 'Note' and '邀请' in text and '加入了群聊' in text:
+        msg.reply('@' + text.split('\"')[3] + '\u2005\n欢迎加入有恒社区🎉🎉🎉\n为方便群内的交流，请更新个人群名片，格式：名字-级别-ID\n有什么问题可以直接在群里@我。')
+
     # if '邀请' in text and '加入群聊' in text:
     #     print(text)
     #     print(text.split('"'))
@@ -50,6 +55,7 @@ def print_others(msg):
 
     # if '@有恒' in text:
     if msg.raw.get('isAt'):
+
         # if '办卡政策' in text:
         #     msg.reply_image('./bankazhengce.jpeg')
         # if '会员政策' in text:
