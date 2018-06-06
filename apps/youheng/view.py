@@ -33,7 +33,7 @@ def udid():
         m = request.form.get('method')
 
         print('------', m, request.form)
-        if not m and m == 'PUT':
+        if m == 'PUT':
             print(request.form)
             return render_template('success.html')
 
