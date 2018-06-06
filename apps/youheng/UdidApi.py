@@ -1,5 +1,5 @@
 
-from flask import jsonify,g,request,make_response,redirect
+from flask import jsonify,g,request,make_response,redirect,render_template
 import logging
 from  apps.main.Result import Result
 import json
@@ -9,16 +9,21 @@ from xml.dom import minidom as dom
 
 class UdidApi(BaseRequest):
 
+    def get(self):
+        udid = request.args.get('udid')
+        return '您的UDID:'+udid
+
     def post(self):
 
         # f.save(os.path.join('app/static',filename))
         dataStr = request.data.decode('iso-8859-1')
-        print(dataStr)
+        udid = dataStr[dataStr.find('<string>')+8:dataStr.find('</string>')]
 
-        # dom.parseString(dataStr[dataStr.find('<dict>'):dataStr.find('</dict>')+7])
+        print(udid)
         # bys = request.data
         # for b in bys:
         #     print(b)
         # print(request.headers)
         # dom.parseString()
-        return redirect('/static/udid.html',code=301)
+
+        return redirect('/udid?udid='+udid,code=301)
