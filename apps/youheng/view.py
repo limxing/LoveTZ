@@ -21,7 +21,7 @@ def index():
 
 
 
-@mod.route('udid')
+@mod.route('udid', methods=['POST', 'GET', 'PUT'])
 def udid():
 
     method = request.method
