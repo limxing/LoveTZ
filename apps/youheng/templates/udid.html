@@ -36,19 +36,19 @@
 
     </style>
     <script type="text/javascript">
-//        window.onerror=function(){return true;}
         window.onload = function () {
             console.log('sdsadasdas');
             if (/Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent)) {
                 document.getElementById("wechat").style.display="none";
             } else {
-
+                document.getElementById("body").style.overflow = "hidden";
+                document.getElementById("body").style.height = "100%";
             }
         }
     </script>
 </head>
 
-<body data-gr-c-s-loaded="true" style="">
+<body data-gr-c-s-loaded="true" style="" id="body">
 
 <!-- wechat share icon -->
 <div style="display:none;">
@@ -63,7 +63,7 @@
 
 
 <!--=== Content Part ===-->
-<div class="container content">
+<div class="container content" >
 
     <div class="span12 margin-bottom-30 appicon-mobile" id="appicon-bg">
         <a href="javascript:void(0);"><img
@@ -73,14 +73,14 @@
     </div>
 </div>
 
-<div id="" class="view row margin-bottom-30 col-md-6 col-md-offset-3" style="padding-top:26px;text-align: center">
+<div id="" class="" style="padding-top:26px;text-align: center">
     <div class="col-md-12">
         <div class="span12 gray-text" style="text-align:center;">
             获取手机中的UDID
         </div>
     </div>
-    <div class="col-md-12" style="margin-top:20px;">
-        <div class="row mb-10 install-btn" style="margin-top:-20px;">
+    <div class="" style="margin-top:20px;">
+        <div class="" style="margin-top:20px;">
             <div class="span12 margin-bottom-20" style="text-align:center;">
                 <div class="spinner">
                     <div id="showtext">正在安装，请按 Home 键在桌面查看</div>
@@ -115,7 +115,7 @@
 <!--<link rel="stylesheet"-->
       <!--href="https://static.pgyer.com/static-20180530/assets/plugins/sky-forms/version-2.0.1/css/custom-sky-forms.css">-->
 <!--<link href="https://static.pgyer.com/static-20180530/fineuploader/fineuploader.css" rel="stylesheet" type="text/css">-->
-<div class="copyright" style="margin-bottom: 0px;">
+<div class="copyright" style="margin-bottom: 0;">
     <div class="container" style="z-index:-1;">
         <div class="row">
             <div class="col-lg-8  col-xs-12 col-md-6 col-sm-6 text-left" style="z-index:0;">

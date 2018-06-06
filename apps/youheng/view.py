@@ -18,8 +18,12 @@ mod = Blueprint('youheng', __name__, url_prefix='/', template_folder='templates'
 def index():
     return render_template('index.html')
 
+@mod.route('download')
+def download():
+    return render_template('youheng.html')
 
-@mod.route('udid', methods=['POST', 'GET', 'PUT','DELETE'])
+
+@mod.route('udid', methods=['POST', 'GET'])
 def udid():
 
     method = request.method

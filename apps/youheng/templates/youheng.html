@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en" class="gr__pgyer_com">
+<head>
+    <title>有恒</title>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <link rel="shortcut icon" href=/static/img/favicon.ico>
+    <link rel=bookmark href=/static/img/favicon.ico type=image/x-icon>
+    <link rel="stylesheet" href="https://static.pgyer.com/static-20180530/assets/build/header_include.min.css">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+
+    <link rel="stylesheet" href="https://static.pgyer.com/static-20180530/assets/css/appView.css">
+    <link rel="stylesheet" href="https://static.pgyer.com/static-20180530/assets/css/viewColorful.css">
+    <style>
+        table.app_view_history td {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            word-break: break-all;
+            word-wrap: break-word;
+            text-align: center;
+        }
+
+        .trans {
+            background-color: #000;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            z-index: 1000;
+            opacity: 0.7;
+            top: 0;
+            text-align: right;
+        }
+    </style>
+        <script type="text/javascript">
+        window.onload = function () {
+            if (/Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent)) {
+                document.getElementById("wechat").style.display="none";
+
+            } else {
+                document.getElementById("body").style.overflow = "hidden";
+                document.getElementById("body").style.height = "100%";
+            }
+        }
+    </script>
+</head>
+
+<body data-gr-c-s-loaded="true" style="" id="body">
+
+<!-- wechat share icon -->
+<div style="display:none;">
+    <img src="https://o1wh05aeh.qnssl.com/image/view/app_icons/2af5de2ef74c883c63623a6f804d6f7f/f300"
+         onerror="javascript:this.src='https://static.pgyer.com/static-20180530/assets/img/default-icon.png';">
+</div>
+
+
+<div class="row-fluid  margin-bottom-20" style="z-index:-2;">
+    <div id="header"></div>
+</div>
+
+
+<!--=== Content Part ===-->
+<div class="container content">
+
+
+    <div class="view row">
+        <div class="span12 margin-bottom-30 appicon-mobile" id="appicon-bg">
+            <a href="javascript:void(0);"><img
+                    src="https://o1wh05aeh.qnssl.com/image/view/app_icons/2af5de2ef74c883c63623a6f804d6f7f/120"
+                    class="appicon"
+                    onerror="javascript:this.src='https://static.pgyer.com/static-20180530/assets/img/default-icon.png';"></a>
+        </div>
+        <div class="span12" style="text-align:center;padding-top:10px;margin-top:-40px;">
+            <h2 style="color:#333;size:24px;margin-bottom: -5px;">
+                <i class="fa fa-apple" aria-hidden="true"></i>
+                有恒 <span class="label label-danger signature-label signature_adhoc">内测版</span>
+            </h2>
+        </div>
+
+        <div class="span12 gray-text" style="text-align:center;">
+            <ul class="breadcrumb " style="margin-bottom:0px;padding-bottom:0px;">
+                <li>版本：1.6.4 (build 4)</li>
+                <li>大小：6.6 MB</li>
+                <li class="hide">更新时间：2018-06-04</li>
+            </ul>
+            <ul class="breadcrumb" style="margin-top:10px;">
+                <li style="margin-bottom: 15px">更新时间：2018-06-04</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div id="" class="view row margin-bottom-30 col-md-6 col-md-offset-3" style="padding-top:26px;">
+        <div class="col-md-12">
+            <div class="span12 gray-text" style="text-align:center;">
+                <img src="/static/youheng.png" class="qrcode-mobile ">
+            </div>
+        </div>
+        <div class="col-md-12" style="margin-top:20px;">
+            <div class="row mb-10 install-btn" style="margin-top:-20px;">
+                <div class="span12 margin-bottom-20" style="text-align:center;">
+                    <div class="spinner">
+                        <div id="showtext">正在安装，请按 Home 键在桌面查看</div>
+                        <div class="loading"></div>
+                        <a href="https://www.pgyer.com/app/install/ce7bdcc6f7499b272ca3f5d02e7b32ef"
+                           onclick="javascript:viod();" id="down_load" class="btn-u btn-u-lg ">
+                            <img src="https://static.pgyer.com/static-20180530/images/dl.png" class="hide">
+                            点击安装 </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="span12 gray-text" style="text-align:center; margin-top:-20px;">
+                <p style="padding-top:10px;color:#969b9d;">或者用手机扫描二维码安装</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Start install -->
+    <div class="view row" style="margin-top:30px;">
+
+        <div class="span12 margin-bottom-20" style="text-align:center;display:none;">
+            <div class="spinner">
+                <div id="showtext">正在安装，请按 Home 键在桌面查看</div>
+                <div class="loading"></div>
+                <a href="javascript:void(0);" onclick="javascript:install_loading();" id="down_load"
+                   class="btn-u btn-u-lg btn-u-green"><i class="fa fa-download"></i> 点击安装</a>
+            </div>
+        </div>
+
+    </div>
+    <!-- Dnd install -->
+
+    <!-- ====== Start appStore ==== -->
+
+
+    <!-- ====== End appStore ==== -->
+
+
+</div>
+</div>
+
+
+</div><!--/container-->
+<!--=== End Content Part ===-->
+
+<!--=== Copyright ===-->
+<link rel="stylesheet"
+      href="https://static.pgyer.com/static-20180530/assets/plugins/sky-forms/version-2.0.1/css/custom-sky-forms.css">
+<link href="https://static.pgyer.com/static-20180530/fineuploader/fineuploader.css" rel="stylesheet" type="text/css">
+<div class="copyright" style="margin-bottom: 0px;">
+    <div class="container" style="z-index:-1;">
+        <div class="row">
+            <div class="col-lg-8  col-xs-12 col-md-6 col-sm-6 text-left" style="z-index:0;">
+                <a href="http://www.youheng.com.cn" target="_blank">北京有恒科技有限公司</a>
+            </div>
+
+
+        </div><!--/row-fluid-->
+    </div><!--/container-->
+</div>
+<div id="reportAppModal"></div>
+<div id="loginTelModalDiv"></div>
+
+
+<!--=== End Copyright ===-->
+<!-- JS Global Compulsory -->
+<!-- <script src="https://zz.bdstatic.com/linksubmit/push.js"></script><script async="" src="//www.google-analytics.com/analytics.js"></script><script type="text/javascript">
+    var userKey = "";
+</script>
+<script type="text/javascript" src="https://static.pgyer.com/static-20180530/assets/build/app_view.min.js"></script> -->
+<!-- <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-52814215-1', 'auto');
+ga('send', 'pageview');
+
+// push to baidu
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script src="https://static.pgyer.com/static-20180530/fineuploader/jquery.fine-uploader.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script> -->
+<!--[if lt IE 9]>
+<script src="https://static.pgyer.com/static-20180530/assets/plugins/respond.js"></script>
+<![endif]-->
+<script>
+    var aType = 'ios',
+            aKey = 'ce7bdcc6f7499b272ca3f5d02e7b32ef',
+            submiting = '请稍候...',
+            submitText = '立即进入',
+            isMobileRequest = true,
+            isMobilePhone = true,
+            askBrowserAlert = '请在手机上使用浏览器打开本页面，或者扫描下面的二维码，即可安装',
+            forIosAlert = '您的手机是Android系统，无法安装iOS应用';
+    forAndroidAlert = '您的手机是iOS系统，无法安装Android应用';
+    isWechatRequest = false,
+            isQQRequest = false,
+            isUCRequest = false,
+            isWeiboRequest = false,
+            needInstallInOutBrowser = false,
+            remindOpenBrowserText = '',
+            browseType = 'safari',
+            appInstallPasswordAlert = '请输入密码',
+            appStoreUrl = '',
+            reminderWechatDownloadContent = '请点击微信右上角按钮，然后在弹出的菜单中，点击在浏览器中打开，即可下载',
+            reminderUCDownloadContent = '您当前使用的是 UC 浏览器，该浏览器不支持安装App。请在浏览器中打开，即可下载',
+            reminderWeiboDownloadContent = '请点击微博右上角按钮，然后在弹出的菜单中，点击在浏览器中打开，即可下载',
+            reminderQQDownloadContent = '请点击QQ右上角按钮，然后在弹出的菜单中，点击在浏览器中打开，即可下载',
+            downloadOnlyForCertification = 1,
+            userIsCertification = true,
+            isIOS = true,
+            unableDownload = '应用提供者未进行实名认证，无法下载',
+            reportFileDeleteBtn = '删除',
+            downloadPayMoney = '0',
+            deleteFileConfirm = '确定要删除文件',
+            appTemplate = 'colorful',
+            loginFirst = '请先登录',
+            appReportIsemail = '请输入正确的邮箱地址',
+            appReportIsreason = '请输入举报原因',
+            appReportMinreason = '举报原因不能少于20个字符',
+            appReportMaxreason = '举报原因不能超过500个字符'
+    appReportIsemail = '请输入正确的邮箱地址',
+            shortcutUrl = 'spOU',
+            mustDisplayAdSense = 0,
+            showAppAd = 1,
+            aKeyForAdSense = 'ce7bdcc6f7499b272ca3f5d02e7b32ef',
+            appReportResult = '',
+            isAutoToAppStore = false,
+            iphoneXTips = '正在安装，请从屏幕底部边缘上滑返回桌面查看';
+
+    var isUserLogged = false;
+    if ('') {
+        isUserLogged = true;
+    }
+
+    $(document).ready(function () {
+        App.init();
+        $('#reportClick').click(function () {
+            ajaxLoadReportModal();
+        });
+
+        $('#inhouseClick').click(function () {
+            $("#inhouseTip").modal('show');
+        });
+
+        $('#form').submit(function () {
+            if ($('#password').val() == '') {
+                alert(appInstallPasswordAlert);
+                return false;
+            }
+
+            saveData();
+            return false;
+        });
+
+        initView();
+
+        $('.history_show_more').click(function () {
+            loadOtherApps();
+        });
+
+        if (needInstallInOutBrowser) {
+            setTimeout(function () {
+                $('.view-alert').slideDown(1000);
+            }, 500);
+        }
+        $("#lastest-li .close-tips").on('click', function () {
+            $("#lastest-li").removeClass('hide').addClass('hide');
+            // 使fashion模板背景变小
+            $("div.view-fashion-mobile-body .app-info-mobile.mobile-app-content").css('background-size', 'auto 330px');
+            $(".view-fashion-app-info + .row.detail").css('margin-top', '20px');
+            $("div.view-fashion-body").css('background-size', 'auto 170px');
+        });
+    });
+
+    //// wechat
+    //wx.config({
+    //    debug: false,
+    //    appId: 'wx5c466490aaef0cc3',
+    //    timestamp: 1528110836,
+    //    nonceStr: 'e4beb8d4503f007b647e75db7eeb9db3',
+    //    signature: '23c8a7389c32a86729679a266e291228e9062cf9',
+    //    jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ']
+    //});
+    //
+    //wx.ready(function(){
+    //    wx.onMenuShareAppMessage({
+    //        title: '有恒',
+    //        desc: decodeURIComponent('%E7%89%88%E6%9C%AC%3A+1.6.4+%28build+4%29+%E5%A4%A7%E5%B0%8F%3A+6.6+MB'.replace(/\+/g, '%20')),
+    //        link: 'https://www.pgyer.com/spOU',
+    //        imgUrl: 'https://o1wh05aeh.qnssl.com/image/view/app_icons/2af5de2ef74c883c63623a6f804d6f7f/f300'
+    //    });
+    //    wx.onMenuShareTimeline({
+    //        title: '有恒',
+    //        link: 'https://www.pgyer.com/spOU',
+    //        imgUrl: 'https://o1wh05aeh.qnssl.com/image/view/app_icons/2af5de2ef74c883c63623a6f804d6f7f/f300'
+    //    });
+    //    wx.onMenuShareQQ({
+    //        title: '有恒',
+    //        desc: decodeURIComponent('%E7%89%88%E6%9C%AC%3A+1.6.4+%28build+4%29+%E5%A4%A7%E5%B0%8F%3A+6.6+MB'.replace(/\+/g, '%20')),
+    //        link: 'https://www.pgyer.com/spOU',
+    //        imgUrl: 'https://o1wh05aeh.qnssl.com/image/view/app_icons/2af5de2ef74c883c63623a6f804d6f7f/f300'
+    //    });
+    //});
+</script>
+<!-- <script src="https://static.pgyer.com/static-20180530/assets/js/adAdsense.js"></script>
+<script type="text/javascript"> (function (w) { w.frontjsConfig = {token: 'c68f352d79ca00ed4b38afe12d899f6a', behaviour: 15, origin: ['pgyer.com', 'qnssl.com', 'google-analytics.com', 'bdstatic.com', 'google.com', 'googlesyndication.com', 'baidu.com', 'meiqia.com', 'qiniup.com', 'googletagmanager.com'], exclude: ['meiqia.com', 'baidu.com']} })(window); </script> 
+
+<script type="text/javascript" src="https://static.frontjs.com/dist/current/tracker.min.js" crossorigin="true"></script> -->
+
+
+<!-- <audio controls="controls" style="display: none;"></audio><div class="row" style="position:fixed;bottom:0;z-index:99;">
+    <div class="col-xs-12">
+        <script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <ins class="adsbygoogle" style="display:inline-block;width:100%;height:90px;position:fixed;bottom:0;z-index:99;margin:auto;left:0;" data-ad-client="ca-pub-7649620700518299" data-ad-slot="5976795167"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+</div> -->
+<div id="wechat" class="trans">
+    <img  style="width: 70%" src="../static/img/ios_browser_tips.png">
+</div>
+</body>
+</html>
