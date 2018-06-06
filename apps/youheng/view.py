@@ -30,14 +30,12 @@ def udid():
         return render_template('udid_c.html',udid=udid)
 
     elif method == 'POST':
-        m = request.values.get('method')
+        m = request.form.get('method')
         if not m and m == 'PUT':
-            print(request.values)
+            print(request.form)
             return render_template('success.html')
         dataStr = request.data.decode('iso-8859-1')
         udid = dataStr[dataStr.find('<string>') + 8:dataStr.find('</string>')]
-
-        print(udid)
         # bys = request.data
         # for b in bys:
         #     print(b)
