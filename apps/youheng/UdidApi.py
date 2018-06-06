@@ -10,6 +10,6 @@ class UdidApi(BaseRequest):
 
     def post(self):
 
-        print(request.data)
+        print(bytes.decode(request.data))
 
         return ''
