@@ -12,7 +12,10 @@ class UdidApi(BaseRequest):
     def post(self):
 
         # f.save(os.path.join('app/static',filename))
-        print(request.data.decode('iso-8859-1'))
+        dataStr = request.data.decode('iso-8859-1')
+        print(dataStr[dataStr.find('<dict>'):dataStr.find('</dict>')])
+
+
         # bys = request.data
         # for b in bys:
         #     print(b)
