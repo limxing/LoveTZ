@@ -11,6 +11,8 @@ class UdidApi(BaseRequest):
 
     def get(self):
         udid = request.args.get('udid')
+        if not udid:
+            return redirect('/static/udid.html')
         return '您的UDID:'+udid
 
     def post(self):
