@@ -31,7 +31,8 @@
 </div>
 <div style="height: 200px;text-align: center">
 
-    <form action="/udid" method="put">
+    <form action="/udid" method="post">
+        <input type="hidden" name="method" value="PUT">
         <p>UDID:<input name="udid" type="text" value="{{ udid }}" readonly="readonly" style="border: 0;width: 300px"></p>
         <p>ID:<input name="id" type="text"></p><br/><br/>
         <p><input type="submit" id="down_load" class="btn-u btn-u-lg ">

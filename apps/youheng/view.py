@@ -30,6 +30,10 @@ def udid():
         return render_template('udid_c.html',udid=udid)
 
     elif method == 'POST':
+        m = request.values.get('method')
+        if not m and m == 'PUT':
+            print(request.values)
+            return render_template('success.html')
         dataStr = request.data.decode('iso-8859-1')
         udid = dataStr[dataStr.find('<string>') + 8:dataStr.find('</string>')]
 
@@ -41,10 +45,9 @@ def udid():
         # dom.parseString()
 
         return redirect('/udid?udid=' + udid, code=301)
-    elif method == 'PUT':
-        print(request.values)
 
-    return render_template('success.html', udid='asdasdasd')
+
+
 
 
 @mod.route('wechat')
