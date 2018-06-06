@@ -32,10 +32,11 @@ def udid():
     elif method == 'POST':
         m = request.form.get('method')
 
-        print('------',request.values, request.form)
+        print('------', m, request.form)
         if not m and m == 'PUT':
             print(request.form)
             return render_template('success.html')
+
         dataStr = request.data.decode('iso-8859-1')
         udid = dataStr[dataStr.find('<string>') + 8:dataStr.find('</string>')]
         # bys = request.data
@@ -44,7 +45,7 @@ def udid():
         # print(request.headers)
         # dom.parseString()
 
-    return redirect('/udid?udid=' + udid, code=301)
+        return redirect('/udid?udid=' + udid, code=301)
 
 
 
