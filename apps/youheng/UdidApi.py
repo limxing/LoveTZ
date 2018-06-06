@@ -10,6 +10,6 @@ class UdidApi(BaseRequest):
 
     def post(self):
 
-        print(bytes.decode(request.data))
+        print(request.values)
 
         return redirect(code=301)
