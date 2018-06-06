@@ -78,10 +78,12 @@ class Question(db.Model):
     def add(self):
         db.session.add(self)
         db.session.commit()
+
     def delete(self):
 
         db.session.delete(self)
         db.session.commit()
+
     def save(self):
         db.session.commit()
 
@@ -109,6 +111,26 @@ class YouhengDuyao(db.Model):
         db.session.commit()
     def save(self):
         db.session.commit()
+
+class YouhengUdid(db.Model):
+    def gen_id(self):
+        return uuid.uuid4().hex
+
+    __tablename__ = 'youheng_udid'
+    uuid = db.Column(db.String(32), default=gen_id, primary_key=True)
+    udid = db.Column(db.String(64))
+    id = db.Column(db.Integer)
+    time_creat = db.Column(db.DateTime)
+    def add(self):
+        db.session.add(self)
+        db.session.commit()
+    def delete(self):
+
+        db.session.delete(self)
+        db.session.commit()
+    def save(self):
+        db.session.commit()
+
 
 class DuyaoSchema(ma.ModelSchema):
     class Meta:
