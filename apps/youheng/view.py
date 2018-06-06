@@ -31,6 +31,8 @@ def udid():
 
     elif method == 'POST':
         m = request.form.get('method')
+
+        print('------',request.values,request.form)
         if not m and m == 'PUT':
             print(request.form)
             return render_template('success.html')
