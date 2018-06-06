@@ -41,7 +41,7 @@
             if (/safari/.test(ua) && !/chrome/.test(ua)) {
                 isIos = true;
                 document.getElementById("wechat").style.display="none";
-
+                document.getElementById("download_button").setAttribute("href","https://www.pgyer.com/app/install/ce7bdcc6f7499b272ca3f5d02e7b32ef");
             } else if (/android/.test(ua)){
                 document.getElementById("wechat").style.display="none";
                 document.getElementById("neice").innerText = "正式版";
@@ -52,16 +52,7 @@
                 document.getElementById("body").style.height = "100%";
             }
         };
-        function download() {
-            if (isIos){
-                window.open("https://www.pgyer.com/app/install/ce7bdcc6f7499b272ca3f5d02e7b32ef");
 
-            }else{
-                window.open("https://card-youheng.oss-cn-beijing.aliyuncs.com/APP/android/youheng_1.5.30_legu_signed_zipalign.apk");
-
-            }
-
-        }
     </script>
 </head>
 
@@ -120,12 +111,11 @@
             <div class="row mb-10 install-btn" style="margin-top:-20px;">
                 <div class="span12 margin-bottom-20" style="text-align:center;">
                     <div class="spinner">
-                        <div id="showtext">正在安装，请按 Home 键在桌面查看</div>
+                        <div id="installing_text" class="hide">正在安装，请按 Home 键在桌面查看</div>
                         <div class="loading"></div>
-                        <button
-                                onclick="download();" id="down_load" class="btn-u btn-u-lg ">
+                        <a href="https://card-youheng.oss-cn-beijing.aliyuncs.com/APP/android/youheng_1.5.30_legu_signed_zipalign.apk" id="download_button" class="btn-u btn-u-lg ">
                             <img src="https://static.pgyer.com/static-20180530/images/dl.png" class="hide">
-                            点击安装 </button>
+                            点击安装 </a>
                     </div>
                 </div>
             </div>

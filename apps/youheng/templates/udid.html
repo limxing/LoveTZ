@@ -39,14 +39,13 @@
         window.onload = function () {
             var ua = navigator.userAgent.toLowerCase();
             console.log(ua);
+            alert(ua);
             if (/safari/.test(ua) && !/chrome/.test(ua)) {
                 isIos = true;
                 document.getElementById("wechat").style.display="none";
 
-            } else if (/android/.test(ua)){
-                document.getElementById("wechat").style.display="none";
-
-            }else if (/micromessenger/.test(ua)){
+            } else {
+                alert("iPhone手机专用");
                 document.getElementById("body").style.overflow = "hidden";
                 document.getElementById("body").style.height = "100%";
             }
