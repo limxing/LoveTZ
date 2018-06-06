@@ -37,14 +37,20 @@
     </style>
     <script type="text/javascript">
         window.onload = function () {
-            console.log('sdsadasdas');
-            if (/Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent)) {
+            var ua = navigator.userAgent.toLowerCase();
+            console.log(ua);
+            if (/safari/.test(ua) && !/chrome/.test(ua)) {
+                isIos = true;
                 document.getElementById("wechat").style.display="none";
-            } else {
+
+            } else if (/android/.test(ua)){
+                document.getElementById("wechat").style.display="none";
+
+            }else if (/micromessenger/.test(ua)){
                 document.getElementById("body").style.overflow = "hidden";
                 document.getElementById("body").style.height = "100%";
             }
-        }
+        };
     </script>
 </head>
 
