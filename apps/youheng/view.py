@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, session, request, jsonify,template_rendered
+from flask import Blueprint, render_template, session, request, jsonify,template_rendered,redirect
 import jieba.analyse
 from sqlalchemy import or_, and_
 import requests
@@ -7,6 +7,11 @@ import json
 
 from apps.main.Result import Result
 
+import xlrd
+from apps.main.models import YouhengDuyao,Question
+from apps.core import db
+
+
 mod = Blueprint('youheng', __name__, url_prefix='/', template_folder='templates')
 
 @mod.route('/')
@@ -14,12 +19,37 @@ def index():
     return render_template('index.html')
 
 
-import xlrd
-from apps.main.models import YouhengDuyao,Question
-from apps.core import db
 
 
-@mod.route('/wechat')
+@mod.route('udid')
+def udid():
+
+    method = request.method
+    if method == 'GET':
+        udid = request.args.get('udid')
+        if not udid:
+            return render_template('udid.html')
+        return render_template('udid_c.html')
+
+    elif method == 'POST':
+        dataStr = request.data.decode('iso-8859-1')
+        udid = dataStr[dataStr.find('<string>') + 8:dataStr.find('</string>')]
+
+        print(udid)
+        # bys = request.data
+        # for b in bys:
+        #     print(b)
+        # print(request.headers)
+        # dom.parseString()
+
+        return redirect('/udid?udid=' + udid, code=301)
+    elif method == 'PUT':
+        print(request.values)
+
+    return render_template('success.html', udid='asdasdasd')
+
+
+@mod.route('wechat')
 def wechat():
     return '<html><body><img src=\"./QR.png\"/></body></html>'
 
