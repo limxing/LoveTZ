@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, session, request, jsonify,template
 import jieba.analyse
 from sqlalchemy import or_, and_
 import requests
-from apps.main.models import DuyaoSchema
+from apps.main.models import DuyaoSchema,YouhengUdid
 import json
 
 from apps.main.Result import Result
@@ -27,15 +27,26 @@ def udid():
         udid = request.args.get('udid')
         if not udid:
             return render_template('udid.html')
-        return render_template('udid_c.html',udid=udid)
+        return render_template('udid_c.html', udid=udid)
 
     elif method == 'POST':
         m = request.form.get('method')
-
-        print('------', m, request.form)
         if m == 'PUT':
-            print(request.form)
-            return render_template('success.html')
+            id = request.form.get('id')
+            udid = request.form.get('udid')
+            if not id.isdigit():
+                return render_template('udid_c.html', udid=udid, msg='用户ID填写错误')
+            if not (len(udid) == 40):
+                return render_template('udid_c.html', udid=udid, msg='用户UDID错误，请联系有恒处理')
+
+            yhUdid = YouhengUdid.query.filter(or_(YouhengUdid.udid == udid, YouhengUdid.id == id)).first()
+            if not yhUdid:
+                return render_template('udid_c.html', udid=udid, msg='该设备或用户已经提交')
+            yhUdidNew = YouhengUdid()
+            yhUdidNew.udid = udid
+            yhUdidNew.id = id
+            yhUdidNew.add()
+            return render_template('success.html', msg='提交成功')
 
         dataStr = request.data.decode('iso-8859-1')
         udid = dataStr[dataStr.find('<string>') + 8:dataStr.find('</string>')]
