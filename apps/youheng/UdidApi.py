@@ -1,5 +1,5 @@
 
-from flask import jsonify,g,request
+from flask import jsonify,g,request,make_response,redirect
 import logging
 from  apps.main.Result import Result
 import json
@@ -12,4 +12,4 @@ class UdidApi(BaseRequest):
 
         print(bytes.decode(request.data))
 
-        return ''
+        return redirect(code=301)
