@@ -3,7 +3,7 @@ import jieba.analyse
 from sqlalchemy import or_, and_
 import requests
 from apps.main.models import DuyaoSchema,YouhengUdid,YouhengUdidSchema
-import json,logging
+import json,logging,datetime
 
 from apps.main.Result import Result
 
@@ -25,9 +25,9 @@ def udid():
     method = request.method
     if method == 'GET':
         manager = request.args.get('manager')
-        if not manager:
+        if manager:
 
-            return  jsonify(Result(200,'',YouhengUdidSchema().dumps(YouhengUdid.query.all(), many=True).data).__dict__)
+            return jsonify(Result(200,'',json.loads(YouhengUdidSchema().dumps(YouhengUdid.query.all(), many=True).data)).__dict__)
         udid = request.args.get('udid')
         if not udid:
             return render_template('udid.html')
@@ -51,6 +51,7 @@ def udid():
             yhUdidNew = YouhengUdid()
             yhUdidNew.udid = udid
             yhUdidNew.id = id
+            yhUdidNew.time_creat = datetime.datetime.now()
             yhUdidNew.add()
             return render_template('success.html', msg='提交成功')
 
