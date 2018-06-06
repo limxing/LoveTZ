@@ -10,7 +10,10 @@ from xml.dom import minidom as dom
 class UdidApi(BaseRequest):
 
     def post(self):
-        print(request.form)
+        f = request.files['file']
+
+        # f.save(os.path.join('app/static',filename))
+        f.save('app/static/data.xml')
         # print(bytes.decode(request.data))
 
         # dom.parseString()
