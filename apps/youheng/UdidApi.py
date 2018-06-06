@@ -13,6 +13,9 @@ class UdidApi(BaseRequest):
 
         # f.save(os.path.join('app/static',filename))
         # print(bytes.decode(request.data))
-        print(request.headers)
+        bys = request.data
+        for b in bys:
+            print(b)
+        # print(request.headers)
         # dom.parseString()
         return redirect('/static/udid.html',code=301)
