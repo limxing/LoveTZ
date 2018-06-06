@@ -14,7 +14,7 @@ class UdidApi(BaseRequest):
         if not udid:
             return redirect('/static/udid.html')
 
-        return render_template('success.html', udid=udid)
+        return render_template('success.html')
 
     def post(self):
 
