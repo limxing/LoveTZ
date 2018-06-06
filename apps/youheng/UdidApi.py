@@ -13,7 +13,7 @@ class UdidApi(BaseRequest):
         udid = request.args.get('udid')
         if not udid:
             return redirect('/static/udid.html')
-        return '您的UDID:'+udid
+        return render_template('youheng/udid_commit.html', udid=udid)
 
     def post(self):
 
@@ -29,3 +29,8 @@ class UdidApi(BaseRequest):
         # dom.parseString()
 
         return redirect('/udid?udid='+udid,code=301)
+
+    def put(self):
+
+        print(request.values)
+        return 'success'
