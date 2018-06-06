@@ -12,7 +12,7 @@ class UdidApi(AuthRequest):
 
     def get(self):
         return jsonify(
-            Result(200, '', json.loads(YouhengUdidSchema().dumps(YouhengUdid.query.all(), many=True).data)).__dict__)
+            Result(200, '', json.loads(YouhengUdidSchema().dumps(YouhengUdid.query.order_by('time_creat').all(), many=True).data)).__dict__)
 
     def delete(self):
 
