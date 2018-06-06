@@ -38,7 +38,7 @@ def udid():
         if m == 'PUT':
             id = request.form.get('id')
             udid = request.form.get('udid')
-            if not id.isdigit():
+            if not id.isdigit() or len(id)>5:
                 return render_template('udid_c.html', udid=udid, msg='用户ID填写错误')
             if not (len(udid) == 40):
                 return render_template('udid_c.html', udid=udid, msg='用户UDID错误，请联系有恒处理')
