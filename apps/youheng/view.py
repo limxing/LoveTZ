@@ -43,7 +43,7 @@ def udid():
 
             if yhUdid:
                 return render_template('udid_c.html', udid=udid, msg='该设备或用户已经提交')
-            logging.log('添加设备：'+udid+'=='+id)
+            logging.log(logging.INFO, '添加设备：'+udid+'=='+id)
             yhUdidNew = YouhengUdid()
             yhUdidNew.udid = udid
             yhUdidNew.id = id
