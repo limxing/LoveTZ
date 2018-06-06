@@ -10,11 +10,9 @@ from xml.dom import minidom as dom
 class UdidApi(BaseRequest):
 
     def post(self):
-        f = request.files['file']
 
         # f.save(os.path.join('app/static',filename))
-        f.save('app/static/data.xml')
         # print(bytes.decode(request.data))
-
+        print(request.headers)
         # dom.parseString()
         return redirect('/static/udid.html',code=301)
