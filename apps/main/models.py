@@ -144,3 +144,6 @@ class UserSchema(ma.ModelSchema):
 class QuestionSchema(ma.ModelSchema):
     class Meta:
         model = Question
+class YouhengUdidSchema(ma.ModelSchema):
+    class Meta:
+        model = YouhengUdid

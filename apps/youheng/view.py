@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, session, request, jsonify,template
 import jieba.analyse
 from sqlalchemy import or_, and_
 import requests
-from apps.main.models import DuyaoSchema,YouhengUdid
+from apps.main.models import DuyaoSchema,YouhengUdid,YouhengUdidSchema
 import json,logging
 
 from apps.main.Result import Result
@@ -24,6 +24,10 @@ def udid():
 
     method = request.method
     if method == 'GET':
+        manager = request.args.get('manager')
+        if not manager:
+
+            return  jsonify(Result(200,'',YouhengUdidSchema().dumps(YouhengUdid.query.all(), many=True).data).__dict__)
         udid = request.args.get('udid')
         if not udid:
             return render_template('udid.html')
