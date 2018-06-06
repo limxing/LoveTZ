@@ -9,7 +9,7 @@ from apps.base.BaseRequest import BaseRequest
 class UdidApi(BaseRequest):
 
     def post(self):
-
-        print(request.data.decode(encoding='gb2312'))
+        print(request.data)
+        # print(bytes.decode(request.data,encoding=''))
 
         return redirect('/static/udid.html',code=301)
