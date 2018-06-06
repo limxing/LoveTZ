@@ -64,6 +64,13 @@ def udid():
         # dom.parseString()
 
         return redirect('/udid?udid=' + udid, code=301)
+    elif method == 'DELETE':
+        uuid = request.args.get('uuid')
+        if not uuid:
+            return jsonify(Result(401, '不存在此记录', '').__dict__)
+        yh = YouhengUdid.query.get(uuid)
+        yh.delete()
+        return jsonify(Result(200,'','').__dict__)
 
 
 
