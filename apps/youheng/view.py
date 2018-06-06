@@ -19,8 +19,6 @@ def index():
     return render_template('index.html')
 
 
-
-
 @mod.route('udid', methods=['POST', 'GET', 'PUT'])
 def udid():
 
@@ -30,7 +28,7 @@ def udid():
         udid = request.args.get('udid')
         if not udid:
             return render_template('udid.html')
-        return render_template('udid_c.html')
+        return render_template('udid_c.html',udid=udid)
 
     elif method == 'POST':
         dataStr = request.data.decode('iso-8859-1')
