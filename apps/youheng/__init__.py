@@ -11,7 +11,7 @@ api = Api()
 api.add_resource(YouhengApi, '/duyao')
 api.add_resource(QuestionApi, '/question')
 api.add_resource(AppApi, '/app')
-# api.add_resource(UdidApi, '/udid')
+api.add_resource(UdidApi, '/udidm')
 
 
 @auth.verify_token

@@ -1,37 +1,24 @@
 
 from flask import jsonify,g,request,make_response,redirect,render_template
 import logging
-from  apps.main.Result import Result
+from apps.main.Result import Result
 import json
-from apps.base.BaseRequest import BaseRequest
+from apps.base.BaseRequest import BaseRequest,AuthRequest
 from xml.dom import minidom as dom
+from apps.main.models import YouhengUdid,YouhengUdidSchema
 
 
-class UdidApi(BaseRequest):
+class UdidApi(AuthRequest):
 
     def get(self):
-        udid = request.args.get('udid')
-        if not udid:
-            return redirect('/static/udid.html')
+        return jsonify(
+            Result(200, '', json.loads(YouhengUdidSchema().dumps(YouhengUdid.query.all(), many=True).data)).__dict__)
 
-        return render_template('success.html')
+    def delete(self):
 
-    def post(self):
-
-        # f.save(os.path.join('app/static',filename))
-        dataStr = request.data.decode('iso-8859-1')
-        udid = dataStr[dataStr.find('<string>')+8:dataStr.find('</string>')]
-
-        print(udid)
-        # bys = request.data
-        # for b in bys:
-        #     print(b)
-        # print(request.headers)
-        # dom.parseString()
-
-        return redirect('/udid?udid='+udid,code=301)
-
-    def put(self):
-
-        print(request.values)
-        return 'success'
+        uuid = request.args.get('uuid')
+        if not uuid:
+            return jsonify(Result(401, '不存在此记录', '').__dict__)
+        yh = YouhengUdid.query.get(uuid)
+        yh.delete()
+        return jsonify(Result(200, '', '').__dict__)
