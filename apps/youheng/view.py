@@ -3,7 +3,7 @@ import jieba.analyse
 from sqlalchemy import or_, and_
 import requests
 from apps.main.models import DuyaoSchema,YouhengUdid
-import json
+import json,logging
 
 from apps.main.Result import Result
 
@@ -40,8 +40,10 @@ def udid():
                 return render_template('udid_c.html', udid=udid, msg='用户UDID错误，请联系有恒处理')
 
             yhUdid = YouhengUdid.query.filter(or_(YouhengUdid.udid == udid, YouhengUdid.id == id)).first()
-            if not yhUdid:
+
+            if yhUdid:
                 return render_template('udid_c.html', udid=udid, msg='该设备或用户已经提交')
+            logging.log('添加设备：'+udid+'=='+id)
             yhUdidNew = YouhengUdid()
             yhUdidNew.udid = udid
             yhUdidNew.id = id
