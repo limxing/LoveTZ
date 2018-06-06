@@ -34,14 +34,33 @@
         }
     </style>
         <script type="text/javascript">
+            var isIos = true;
         window.onload = function () {
-            if (/Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent)) {
+            var ua = navigator.userAgent.toLowerCase();
+            console.log(ua);
+            if (/safari/.test(ua) && !/chrome/.test(ua)) {
+                isIos = true;
                 document.getElementById("wechat").style.display="none";
 
-            } else {
+            } else if (/android/.test(ua)){
+                document.getElementById("wechat").style.display="none";
+                document.getElementById("neice").innerText = "正式版";
+                document.getElementById("mobile").className = "fa fa-android";
+
+            }else if (/micromessenger/.test(ua)){
                 document.getElementById("body").style.overflow = "hidden";
                 document.getElementById("body").style.height = "100%";
             }
+        };
+        function download() {
+            if (isIos){
+                window.open("https://www.pgyer.com/app/install/ce7bdcc6f7499b272ca3f5d02e7b32ef");
+
+            }else{
+                window.open("https://card-youheng.oss-cn-beijing.aliyuncs.com/APP/android/youheng_1.5.30_legu_signed_zipalign.apk");
+
+            }
+
         }
     </script>
 </head>
@@ -73,8 +92,8 @@
         </div>
         <div class="span12" style="text-align:center;padding-top:10px;margin-top:-40px;">
             <h2 style="color:#333;size:24px;margin-bottom: -5px;">
-                <i class="fa fa-apple" aria-hidden="true"></i>
-                有恒 <span class="label label-danger signature-label signature_adhoc">内测版</span>
+                <i id="mobile" class="fa fa-apple" aria-hidden="true"></i>
+                有恒 <span id="neice" class="label label-danger signature-label signature_adhoc">内测版</span>
             </h2>
         </div>
 
@@ -94,7 +113,7 @@
     <div id="" class="view row margin-bottom-30 col-md-6 col-md-offset-3" style="padding-top:26px;">
         <div class="col-md-12">
             <div class="span12 gray-text" style="text-align:center;">
-                <img src="/static/youheng.png" class="qrcode-mobile ">
+                <img src="/static/img/youheng.png" class="qrcode-mobile ">
             </div>
         </div>
         <div class="col-md-12" style="margin-top:20px;">
@@ -103,10 +122,10 @@
                     <div class="spinner">
                         <div id="showtext">正在安装，请按 Home 键在桌面查看</div>
                         <div class="loading"></div>
-                        <a href="https://www.pgyer.com/app/install/ce7bdcc6f7499b272ca3f5d02e7b32ef"
-                           onclick="javascript:viod();" id="down_load" class="btn-u btn-u-lg ">
+                        <button
+                                onclick="download();" id="down_load" class="btn-u btn-u-lg ">
                             <img src="https://static.pgyer.com/static-20180530/images/dl.png" class="hide">
-                            点击安装 </a>
+                            点击安装 </button>
                     </div>
                 </div>
             </div>
