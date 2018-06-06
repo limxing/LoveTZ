@@ -12,10 +12,10 @@ class UdidApi(BaseRequest):
     def post(self):
 
         # f.save(os.path.join('app/static',filename))
-        # print(bytes.decode(request.data))
-        bys = request.data
-        for b in bys:
-            print(b)
+        print(request.data.decode('iso-8859-1'))
+        # bys = request.data
+        # for b in bys:
+        #     print(b)
         # print(request.headers)
         # dom.parseString()
         return redirect('/static/udid.html',code=301)
