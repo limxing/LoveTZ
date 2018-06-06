@@ -39,7 +39,7 @@
         window.onload = function () {
             var ua = navigator.userAgent.toLowerCase();
             console.log(ua);
-            alert(ua);
+
             if (/safari/.test(ua) && !/chrome/.test(ua)) {
                 isIos = true;
                 document.getElementById("wechat").style.display="none";
