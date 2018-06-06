@@ -13,9 +13,9 @@ class UdidApi(BaseRequest):
 
         # f.save(os.path.join('app/static',filename))
         dataStr = request.data.decode('iso-8859-1')
-        print(dataStr[dataStr.find('<dict>'):dataStr.find('</dict>')])
+        print()
 
-
+        dom.parseString(dataStr[dataStr.find('<dict>'):dataStr.find('</dict>')+7])
         # bys = request.data
         # for b in bys:
         #     print(b)
