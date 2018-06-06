@@ -25,6 +25,7 @@ def index():
 def udid():
 
     method = request.method
+    print(method)
     if method == 'GET':
         udid = request.args.get('udid')
         if not udid:
