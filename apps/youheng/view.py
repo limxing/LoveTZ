@@ -19,7 +19,7 @@ def index():
     return render_template('index.html')
 
 
-@mod.route('udid', methods=['POST', 'GET', 'PUT'])
+@mod.route('udid', methods=['POST', 'GET', 'PUT','DELETE'])
 def udid():
 
     method = request.method
