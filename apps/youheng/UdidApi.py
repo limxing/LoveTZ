@@ -10,7 +10,7 @@ from xml.dom import minidom as dom
 class UdidApi(BaseRequest):
 
     def post(self):
-        print(type(request.data))
+        print(request.data.decode('ascii'))
         # print(bytes.decode(request.data))
 
         # dom.parseString()
