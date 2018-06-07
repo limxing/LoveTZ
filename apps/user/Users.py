@@ -32,9 +32,12 @@ class Users(object):
             return json.dumps(Result(201, '请输入手机号码再请求', None).json())
         if re.compile('^1[3,4,5,7,8]\d{9}$').match(phone) is None:
             return json.dumps(Result(201, '请输入正确手机号码再请求', None).json())
-
-        user_db = db.session.query(User).filter_by(phone=phone).first()
-
+        user_db = None
+        try:
+            user_db = db.session.query(User).filter_by(phone=phone).first()
+        except:
+            db.session.rollback()
+            user_db = db.session.query(User).filter_by(phone=phone).first()
         if not user_db:
             return Result(201, 'User is not exist', '').__dict__
             # user_db = User()
