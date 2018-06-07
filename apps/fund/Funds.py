@@ -21,15 +21,15 @@ class Funds:
             # return json.dumps(Result(401, '不存在:' + code + '的记录', None).json())
         else:
             # return json.dumps(Result(200, 'success', json.loads(FundSchema().dumps(fund_db).data)).json())
-            fund = Fund()
+            # fund = Fund()
+            #
+            # fund.maxamt = '在您表示感谢之前，无法为您提供服务'
+            # fund.uuid = 'abcd'
+            # fund.feeratio = 0
+            # fund.mixamt = 0
 
-            fund.maxamt = '在您表示感谢之前，无法为您提供服务'
-            fund.uuid = 'abcd'
-            fund.feeratio = 0
-            fund.mixamt = 0
-
-            # return Result(200, 'success', json.loads(FundSchema().dumps(fund_db).data)).__dict__
-            return Result(200, 'success', json.loads(FundSchema().dumps(fund).data)).__dict__
+            return Result(200, 'success', json.loads(FundSchema().dumps(fund_db).data)).__dict__
+            # return Result(200, 'success', json.loads(FundSchema().dumps(fund).data)).__dict__
 
 
     @staticmethod
