@@ -53,6 +53,10 @@
                 document.getElementById("body").style.height = "100%";
             }
         };
+        function install() {
+            document.getElementById('download_button').style.display = "none";
+            document.getElementById('installing_text').className = '';
+        }
 
     </script>
 </head>
@@ -114,7 +118,7 @@
                     <div class="spinner">
                         <div id="installing_text" class="hide">正在安装，请按 Home 键在桌面查看</div>
                         <div class="loading"></div>
-                        <a href="https://card-youheng.oss-cn-beijing.aliyuncs.com/APP/android/youheng_1.5.30_legu_signed_zipalign.apk" id="download_button" class="btn-u btn-u-lg ">
+                        <a href="https://card-youheng.oss-cn-beijing.aliyuncs.com/APP/android/youheng_1.5.30_legu_signed_zipalign.apk" onclick="install()" id="download_button" class="btn-u btn-u-lg ">
                             <img src="https://static.pgyer.com/static-20180530/images/dl.png" class="hide">
                             点击安装 </a>
                     </div>
@@ -128,18 +132,18 @@
     </div>
 
     <!-- Start install -->
-    <div class="view row" style="margin-top:30px;">
+    <!--<div class="view row" style="margin-top:30px;">-->
 
-        <div class="span12 margin-bottom-20" style="text-align:center;display:none;">
-            <div class="spinner">
-                <div id="showtext">正在安装，请按 Home 键在桌面查看</div>
-                <div class="loading"></div>
-                <a href="javascript:void(0);" onclick="javascript:install_loading();" id="down_load"
-                   class="btn-u btn-u-lg btn-u-green"><i class="fa fa-download"></i> 点击安装</a>
-            </div>
-        </div>
+        <!--<div class="span12 margin-bottom-20" style="text-align:center;display:none;">-->
+            <!--<div class="spinner">-->
+                <!--<div id="showtext">正在安装，请按 Home 键在桌面查看</div>-->
+                <!--<div class="loading"></div>-->
+                <!--<a href="javascript:void(0);" onclick="javascript:install_loading();" id="down_load"-->
+                   <!--class="btn-u btn-u-lg btn-u-green"><i class="fa fa-download"></i> 点击安装</a>-->
+            <!--</div>-->
+        <!--</div>-->
 
-    </div>
+    <!--</div>-->
     <!-- Dnd install -->
 
     <!-- ====== Start appStore ==== -->
