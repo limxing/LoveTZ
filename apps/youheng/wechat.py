@@ -9,7 +9,7 @@ from apps.core import db
 from apps.main.models import Question,Ask
 import jieba.analyse
 from sqlalchemy import or_, and_
-import logging
+import logging,datetime
 
 # bot = Bot(console_qr=True)
 bot = Bot(cache_path=True, console_qr=True)
@@ -109,6 +109,7 @@ def print_others(msg):
                 # msg.reply('抱歉，我还没有搜索到相关问题的答案')
                 a = Ask()
                 a.key = text
+                a.time_creat = datetime.datetime.now()
                 db.session.add(a)
                 db.session.commit()
 
