@@ -24,7 +24,7 @@ class AskApi(AuthRequest):
 
         question = Ask.query.get(request.values.get('uuid'))
         question.result = request.values.get('result')
-        question.question = request.values.get('key')
+        question.question = request.values.get('question')
         question.image = request.values.get('image')
         question.save()
 
