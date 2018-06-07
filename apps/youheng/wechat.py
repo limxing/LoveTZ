@@ -105,13 +105,22 @@ def print_others(msg):
             if '天气' in text:
                 msg.reply(talks_robot(text))
             else:
-                logging.log(logging.INFO, '保存未识别的问题：' + text)
+
                 # msg.reply('抱歉，我还没有搜索到相关问题的答案')
-                a = Ask()
-                a.key = text
-                a.time_creat = datetime.datetime.now()
-                db.session.add(a)
-                db.session.commit()
+                ask = Ask.query.filter(Ask.key==text).first()
+                if not ask:
+                    a = Ask()
+                    a.key = text
+                    a.time_creat = datetime.datetime.now()
+                    db.session.add(a)
+                    db.session.commit()
+                    logging.log(logging.INFO, '保存未识别的问题：' + text)
+                else:
+                    logging.log(logging.INFO, '该问题存在：' + text)
+                    if ask.result:
+                        msg.reply(ask.result)
+                    elif ask.image:
+                        msg.reply_image('./images/' + ask.image)
 
 
             # db.session.query(Question).filter(Question.key.like('%'+text+'%')).first()
