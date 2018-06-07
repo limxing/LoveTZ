@@ -61,6 +61,16 @@ class Ask(db.Model):
     key = db.Column(db.Text)
     result = db.Column(db.Text)
     image = db.Column(db.String(128))
+    time_creat = db.Column(db.DateTime)
+    def add(self):
+        db.session.add(self)
+        db.session.commit()
+    def delete(self):
+
+        db.session.delete(self)
+        db.session.commit()
+    def save(self):
+        db.session.commit()
 
 
 class Question(db.Model):
@@ -147,3 +157,6 @@ class QuestionSchema(ma.ModelSchema):
 class YouhengUdidSchema(ma.ModelSchema):
     class Meta:
         model = YouhengUdid
+class AskSchema(ma.ModelSchema):
+    class Meta:
+        model = Ask
