@@ -7,12 +7,8 @@ isAES = False
 import base64
 from Crypto.Cipher import AES
 from binascii import b2a_hex, a2b_hex
-import logging
-logging.getLogger("requests").setLevel(logging.WARNING)
-logging.getLogger("urllib3.connectionpool").setLevel(logging.WARNING)
-logging.getLogger("jieba").setLevel(logging.WARNING)
-logging.getLogger("wxpy.api.bot").setLevel(logging.WARNING)
-logging.getLogger("wxpy.api.chats.chat").setLevel(logging.WARNING)
+
+
 
 @app.errorhandler(401)
 def handler401():

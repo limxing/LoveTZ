@@ -5,6 +5,7 @@ import json
 from apps.base.BaseRequest import BaseRequest,AuthRequest
 import datetime
 from sqlalchemy import desc
+from apps.core import photos
 
 
 class QuestionApi(AuthRequest):
@@ -42,7 +43,10 @@ class QuestionApi(AuthRequest):
         question = Question.query.get(request.values.get('uuid'))
         question.result = request.values.get('result')
         question.question = request.values.get('question')
+        # if 'image' in request.files:
+        #     filename = photos.save(request.files.get('image'))
         question.image = request.values.get('image')
+            # question.image = filename
         question.time_update = datetime.datetime.now()
         question.save()
 

@@ -9,7 +9,7 @@ from apps.core import db
 from apps.main.models import Question,Ask
 import jieba.analyse
 from sqlalchemy import or_, and_
-import logging,datetime
+import logging,datetime,os
 
 # bot = Bot(console_qr=True)
 bot = Bot(cache_path=True, console_qr=True)
@@ -120,7 +120,11 @@ def print_others(msg):
                     if ask.result:
                         msg.reply(ask.result)
                     elif ask.image:
-                        msg.reply_image('./images/' + ask.image)
+
+                        if os.path.exists('./images/' + ask.image):
+                            msg.reply_image('./images/' + ask.image)
+                        elif os.path.exists('./upload/' + ask.image):
+                            msg.reply_image('./upload/' + ask.image)
 
 
             # db.session.query(Question).filter(Question.key.like('%'+text+'%')).first()
@@ -146,4 +150,5 @@ def print_others(msg):
 
 
 bot.start()
-# bot.join()
+if __name__ == '__main__':
+    bot.join()

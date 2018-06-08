@@ -1,7 +1,7 @@
-from flask import Blueprint, render_template, session, request, jsonify,template_rendered,redirect
+from flask import Blueprint, render_template, session, request, jsonify,template_rendered,redirect,abort
 import jieba.analyse
 from sqlalchemy import or_, and_
-import requests
+import requests,uuid
 from apps.main.models import DuyaoSchema,YouhengUdid,YouhengUdidSchema
 import json,logging,datetime
 
@@ -9,18 +9,42 @@ from apps.main.Result import Result
 
 import xlrd
 from apps.main.models import YouhengDuyao,Question
-from apps.core import db
+from apps.core import db,photos
 
 
 mod = Blueprint('youheng', __name__, url_prefix='/', template_folder='templates')
+
 
 @mod.route('/')
 def index():
     return render_template('index.html')
 
+
 @mod.route('download')
 def download():
     return render_template('youheng.html')
+
+
+@mod.route('upload', methods=['POST'])
+def upload():
+    if 'image' in request.files:
+
+        file = request.files.get('image')
+        filename = uuid.uuid4().hex + file.filename[file.filename.find('.'):]
+
+        photos.save(file, name=filename)
+        print(filename)
+        return filename
+    print('未知参数')
+    return 'NULL'
+
+
+@mod.route('image/<name>')
+def image(name):
+    if name is None:
+        abort(404)
+    return photos.url(name)
+
 
 
 @mod.route('udid', methods=['POST', 'GET'])

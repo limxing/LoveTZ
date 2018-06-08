@@ -9,7 +9,11 @@ logging.basicConfig(
 )
 
 logger = logging.getLogger(__name__)
-
+logging.getLogger("requests").setLevel(logging.WARNING)
+logging.getLogger("urllib3.connectionpool").setLevel(logging.WARNING)
+logging.getLogger("jieba").setLevel(logging.WARNING)
+logging.getLogger("wxpy.api.bot").setLevel(logging.WARNING)
+logging.getLogger("wxpy.api.chats.chat").setLevel(logging.WARNING)
 
 def load_config():
     # mode = os.environ.get('MODE')
