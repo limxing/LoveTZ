@@ -18,3 +18,4 @@ wxpy==0.3.9.8
 xlrd==1.1.0
 flask-restful==0.3.6
 flask-httpauth==3.2.3
+tinify==1.5.1
