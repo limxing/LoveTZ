@@ -9,9 +9,9 @@ import tinify,time
 tinify.key = "5yQ9zoNVE6mG9wFfbAUGWHF3T5KLN5AC"
 
 from apps.main.Result import Result
-
+from sqlalchemy import desc
 import xlrd
-from apps.main.models import YouhengDuyao,Question
+from apps.main.models import YouhengDuyao,Question,App
 from apps.core import db,photos
 
 
@@ -33,12 +33,15 @@ class ploadThread(threading.Thread):
 
 @mod.route('/')
 def index():
+
     return render_template('index.html')
 
 
 @mod.route('download')
 def download():
-    return render_template('youheng.html')
+    androidApp = App.query.filter(App.name == 'Android').order_by(desc('time_creat')).first()
+    iosApp = App.query.filter(App.name == 'IOS').order_by(desc('time_creat')).first()
+    return render_template('youheng.html', androidApp=androidApp, iosApp=iosApp)
 
 
 @mod.route('upload', methods=['POST'])

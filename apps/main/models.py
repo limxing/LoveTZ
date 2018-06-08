@@ -62,9 +62,37 @@ class Ask(db.Model):
     result = db.Column(db.Text)
     image = db.Column(db.String(128))
     time_creat = db.Column(db.DateTime)
+
     def add(self):
         db.session.add(self)
         db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
+    def save(self):
+        db.session.commit()
+
+
+class App(db.Model):
+    def gen_id(self):
+        return uuid.uuid4().hex
+
+    __tablename__ = 'youheng_app'
+    uuid = db.Column(db.String(32), default=gen_id, primary_key=True)
+    size = db.Column(db.String(32))
+    version = db.Column(db.String(32))
+    url = db.Column(db.String(128))
+    name = db.Column(db.String(16))
+
+    time_creat = db.Column(db.DateTime)
+    time_update = db.Column(db.DateTime)
+
+    def add(self):
+        db.session.add(self)
+        db.session.commit()
+
     def delete(self):
 
         db.session.delete(self)
@@ -151,12 +179,22 @@ class UserSchema(ma.ModelSchema):
     class Meta:
         model = User
 
+
 class QuestionSchema(ma.ModelSchema):
     class Meta:
         model = Question
+
+
 class YouhengUdidSchema(ma.ModelSchema):
     class Meta:
         model = YouhengUdid
+
+
 class AskSchema(ma.ModelSchema):
     class Meta:
         model = Ask
+
+
+class AppSchema(ma.ModelSchema):
+    class Meta:
+        model = App

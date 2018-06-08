@@ -33,22 +33,25 @@
             text-align: right;
         }
     </style>
-        <script type="text/javascript">
-            var isIos = true;
+    <script type="text/javascript">
+        var isIos = true;
         window.onload = function () {
             var ua = navigator.userAgent.toLowerCase();
             console.log(ua);
             if (/safari/.test(ua) && !/chrome/.test(ua)) {
                 isIos = true;
-                document.getElementById("wechat").style.display="none";
-                document.getElementById("download_button").setAttribute("href","https://www.pgyer.com/app/install/f886acb93d13394e5a3c6a07ddf4aa00");
+                document.getElementById("wechat").style.display = "none";
+                document.getElementById("download_button").setAttribute("href", "{{ iosApp.url }}");
+                document.getElementById("version").innerHTML = "{{ iosApp.version }}";
+                document.getElementById("size").innerHTML = "{{ iosApp.size }}";
+                document.getElementById("time").innerHTML = "{{ iosApp.time_update }}";
 //                document.getElementById("download_button").setAttribute("href","itms-services://?action=download-manifest&url=https://www.leefeng.top/apple/ios.plist");
-            } else if (/android/.test(ua)){
-                document.getElementById("wechat").style.display="none";
+            } else if (/android/.test(ua)) {
+                document.getElementById("wechat").style.display = "none";
                 document.getElementById("neice").innerText = "正式版";
                 document.getElementById("mobile").className = "fa fa-android";
 
-            }else if (/micromessenger/.test(ua)){
+            } else if (/micromessenger/.test(ua)) {
                 document.getElementById("body").style.overflow = "hidden";
                 document.getElementById("body").style.height = "100%";
             }
@@ -95,12 +98,14 @@
 
         <div class="span12 gray-text" style="text-align:center;">
             <ul class="breadcrumb " style="margin-bottom:0px;padding-bottom:0px;">
-                <li>版本：1.6.7 (build 5)</li>
-                <li>大小：13.14 MB</li>
-                <li class="hide">更新时间：2018-06-07</li>
+                版本：
+                <li id="version">{{ androidApp.version }}</li>
+                大小：
+                <li id="size">{{ androidApp.size }}</li>
             </ul>
             <ul class="breadcrumb" style="margin-top:10px;">
-                <li style="margin-bottom: 15px">更新时间：2018-06-07</li>
+                更新时间：
+                <li id="time" style="margin-bottom: 15px">{{ androidApp.time_update }}</li>
             </ul>
         </div>
 
@@ -118,7 +123,7 @@
                     <div class="spinner">
                         <div id="installing_text" class="hide">正在安装，请按 Home 键在桌面查看</div>
                         <div class="loading"></div>
-                        <a href="https://card-youheng.oss-cn-beijing.aliyuncs.com/APP/android/youheng_1.5.30_legu_signed_zipalign.apk" onclick="install()" id="download_button" class="btn-u btn-u-lg ">
+                        <a href="{{ androidApp.url }}" onclick="install()" id="download_button" class="btn-u btn-u-lg ">
                             <img src="https://static.pgyer.com/static-20180530/images/dl.png" class="hide">
                             点击安装 </a>
                     </div>
@@ -134,14 +139,14 @@
     <!-- Start install -->
     <!--<div class="view row" style="margin-top:30px;">-->
 
-        <!--<div class="span12 margin-bottom-20" style="text-align:center;display:none;">-->
-            <!--<div class="spinner">-->
-                <!--<div id="showtext">正在安装，请按 Home 键在桌面查看</div>-->
-                <!--<div class="loading"></div>-->
-                <!--<a href="javascript:void(0);" onclick="javascript:install_loading();" id="down_load"-->
-                   <!--class="btn-u btn-u-lg btn-u-green"><i class="fa fa-download"></i> 点击安装</a>-->
-            <!--</div>-->
-        <!--</div>-->
+    <!--<div class="span12 margin-bottom-20" style="text-align:center;display:none;">-->
+    <!--<div class="spinner">-->
+    <!--<div id="showtext">正在安装，请按 Home 键在桌面查看</div>-->
+    <!--<div class="loading"></div>-->
+    <!--<a href="javascript:void(0);" onclick="javascript:install_loading();" id="down_load"-->
+    <!--class="btn-u btn-u-lg btn-u-green"><i class="fa fa-download"></i> 点击安装</a>-->
+    <!--</div>-->
+    <!--</div>-->
 
     <!--</div>-->
     <!-- Dnd install -->
@@ -346,7 +351,7 @@ ga('send', 'pageview');
     </div>
 </div> -->
 <div id="wechat" class="trans">
-    <img  style="width: 70%" src="../static/img/ios_browser_tips.png">
+    <img style="width: 70%" src="../static/img/ios_browser_tips.png">
 </div>
 </body>
 </html>
