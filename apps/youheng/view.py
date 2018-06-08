@@ -4,6 +4,9 @@ from sqlalchemy import or_, and_
 import requests,uuid
 from apps.main.models import DuyaoSchema,YouhengUdid,YouhengUdidSchema
 import json,logging,datetime
+import threading
+import tinify,time
+tinify.key = "5yQ9zoNVE6mG9wFfbAUGWHF3T5KLN5AC"
 
 from apps.main.Result import Result
 
@@ -13,6 +16,19 @@ from apps.core import db,photos
 
 
 mod = Blueprint('youheng', __name__, url_prefix='/', template_folder='templates')
+
+
+class ploadThread(threading.Thread):
+
+    def __init__(self, filename):
+        super().__init__()
+        self.path = './upload/' + filename
+
+    def run(self):
+
+        time.sleep(3)
+        source = tinify.from_file(self.path)
+        source.to_file(self.path)
 
 
 @mod.route('/')
@@ -31,9 +47,9 @@ def upload():
 
         file = request.files.get('image')
         filename = uuid.uuid4().hex + file.filename[file.filename.find('.'):]
-
         photos.save(file, name=filename)
-        logging.log(logging.INFO,filename)
+        ploadThread(filename).start()
+        logging.log(logging.INFO, filename)
         return filename
     logging.log(logging.INFO, '未知参数')
     return 'NULL'
