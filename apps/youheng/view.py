@@ -33,9 +33,9 @@ def upload():
         filename = uuid.uuid4().hex + file.filename[file.filename.find('.'):]
 
         photos.save(file, name=filename)
-        print(filename)
+        logging.log(logging.INFO,filename)
         return filename
-    print('未知参数')
+    logging.log(logging.INFO, '未知参数')
     return 'NULL'
 
 
