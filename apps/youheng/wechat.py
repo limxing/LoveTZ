@@ -73,7 +73,10 @@ def print_others(msg):
                         msg.reply('@' + ActualNickName + '\u2005\n' + str(question.uuid)+'、'+question.question+'\n'+question.result.replace('\\n', '\n'))
                     if question.image:
                         msg.reply('@' + ActualNickName + '\u2005')
-                        msg.reply_image('./images/'+question.image)
+                        if os.path.exists('./images/' + question.image):
+                            msg.reply_image('./images/' + question.image)
+                        elif os.path.exists('./upload/' + question.image):
+                            msg.reply_image('./upload/' + question.image)
                     return
             # question = Question.query.filter(Question.question.like('%'+text+'%')).first()
             words = jieba.analyse.extract_tags(text)
@@ -93,7 +96,10 @@ def print_others(msg):
                 if question.result:
                     msg.reply('@' + ActualNickName + ' \n'+question.question+'\n'+question.result.replace('\\n', '\n'))
                 if question.image:
-                    msg.reply_image('./images/'+question.image)
+                    if os.path.exists('./images/' + question.image):
+                        msg.reply_image('./images/' + question.image)
+                    elif os.path.exists('./upload/' + question.image):
+                        msg.reply_image('./upload/' + question.image)
                 return
             if len(questions) > 1:
                 s = '@' + ActualNickName + ' \n'
@@ -120,11 +126,12 @@ def print_others(msg):
                     if ask.result:
                         msg.reply(ask.result)
                     elif ask.image:
-
                         if os.path.exists('./images/' + ask.image):
                             msg.reply_image('./images/' + ask.image)
                         elif os.path.exists('./upload/' + ask.image):
                             msg.reply_image('./upload/' + ask.image)
+
+
 
 
             # db.session.query(Question).filter(Question.key.like('%'+text+'%')).first()
