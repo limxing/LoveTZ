@@ -47,7 +47,7 @@ def print_others(msg):
     ActualNickName = msg.raw.get('ActualNickName')
     if msg.type == 'Note' and '邀请' in text and '加入了群聊' in text:
         name = text.split('\"')[3]
-        msg.reply('@' + name + '\u2005\n欢迎加入有恒社区🎉🎉🎉\n为方便群内的交流，请更新个人群名片，格式：名字-级别-ID\n有什么问题可以直接在群里@我。')
+        msg.reply('@' + name + '\u2005\n欢迎加入有恒社区🎉🎉🎉\n为方便群内的交流，请更新个人群名片，格式：名字-级别-ID\n有什么问题可以直接在群里@有恒客服。')
         logging.log(logging.INFO, "欢迎加入有恒社区："+name)
     # if '邀请' in text and '加入群聊' in text:
     #     print(text)
@@ -73,10 +73,14 @@ def print_others(msg):
                         msg.reply('@' + ActualNickName + '\u2005\n' + str(question.uuid)+'、'+question.question+'\n'+question.result.replace('\\n', '\n'))
                     if question.image:
                         msg.reply('@' + ActualNickName + '\u2005')
-                        if os.path.exists('./images/' + question.image):
-                            msg.reply_image('./images/' + question.image)
-                        elif os.path.exists('./upload/' + question.image):
+                        # if os.path.exists('./images/' + question.image):
+                        #     msg.reply_image('./images/' + question.image)
+                        if os.path.exists('./upload/' + question.image):
                             msg.reply_image('./upload/' + question.image)
+                        else:
+                            msg.reply(
+                                '@' + ActualNickName + '\u2005 \n抱歉，此问题需要@有恒客服\u2005 处理')
+
                     return
             # question = Question.query.filter(Question.question.like('%'+text+'%')).first()
             words = jieba.analyse.extract_tags(text)
@@ -96,10 +100,14 @@ def print_others(msg):
                 if question.result:
                     msg.reply('@' + ActualNickName + ' \n'+question.question+'\n'+question.result.replace('\\n', '\n'))
                 if question.image:
-                    if os.path.exists('./images/' + question.image):
-                        msg.reply_image('./images/' + question.image)
-                    elif os.path.exists('./upload/' + question.image):
+                    # if os.path.exists('./images/' + question.image):
+                    #     msg.reply_image('./images/' + question.image)
+                    if os.path.exists('./upload/' + question.image):
                         msg.reply_image('./upload/' + question.image)
+                    else:
+                        msg.reply(
+                            '@' + ActualNickName + '\u2005 \n抱歉，此问题需要@有恒客服\u2005 处理')
+
                 return
             if len(questions) > 1:
                 s = '@' + ActualNickName + ' \n'
@@ -126,9 +134,9 @@ def print_others(msg):
                     if ask.result:
                         msg.reply(ask.result)
                     elif ask.image:
-                        if os.path.exists('./images/' + ask.image):
-                            msg.reply_image('./images/' + ask.image)
-                        elif os.path.exists('./upload/' + ask.image):
+                        # if os.path.exists('./images/' + ask.image):
+                        #     msg.reply_image('./images/' + ask.image)
+                        if os.path.exists('./upload/' + ask.image):
                             msg.reply_image('./upload/' + ask.image)
 
 
