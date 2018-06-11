@@ -267,45 +267,45 @@ ga('send', 'pageview');
         isUserLogged = true;
     }
 
-    $(document).ready(function () {
-        App.init();
-        $('#reportClick').click(function () {
-            ajaxLoadReportModal();
-        });
-
-        $('#inhouseClick').click(function () {
-            $("#inhouseTip").modal('show');
-        });
-
-        $('#form').submit(function () {
-            if ($('#password').val() == '') {
-                alert(appInstallPasswordAlert);
-                return false;
-            }
-
-            saveData();
-            return false;
-        });
-
-        initView();
-
-        $('.history_show_more').click(function () {
-            loadOtherApps();
-        });
-
-        if (needInstallInOutBrowser) {
-            setTimeout(function () {
-                $('.view-alert').slideDown(1000);
-            }, 500);
-        }
-        $("#lastest-li .close-tips").on('click', function () {
-            $("#lastest-li").removeClass('hide').addClass('hide');
-            // 使fashion模板背景变小
-            $("div.view-fashion-mobile-body .app-info-mobile.mobile-app-content").css('background-size', 'auto 330px');
-            $(".view-fashion-app-info + .row.detail").css('margin-top', '20px');
-            $("div.view-fashion-body").css('background-size', 'auto 170px');
-        });
-    });
+//    $(document).ready(function () {
+//        App.init();
+//        $('#reportClick').click(function () {
+//            ajaxLoadReportModal();
+//        });
+//
+//        $('#inhouseClick').click(function () {
+//            $("#inhouseTip").modal('show');
+//        });
+//
+//        $('#form').submit(function () {
+//            if ($('#password').val() == '') {
+//                alert(appInstallPasswordAlert);
+//                return false;
+//            }
+//
+//            saveData();
+//            return false;
+//        });
+//
+//        initView();
+//
+//        $('.history_show_more').click(function () {
+//            loadOtherApps();
+//        });
+//
+//        if (needInstallInOutBrowser) {
+//            setTimeout(function () {
+//                $('.view-alert').slideDown(1000);
+//            }, 500);
+//        }
+//        $("#lastest-li .close-tips").on('click', function () {
+//            $("#lastest-li").removeClass('hide').addClass('hide');
+//            // 使fashion模板背景变小
+//            $("div.view-fashion-mobile-body .app-info-mobile.mobile-app-content").css('background-size', 'auto 330px');
+//            $(".view-fashion-app-info + .row.detail").css('margin-top', '20px');
+//            $("div.view-fashion-body").css('background-size', 'auto 170px');
+//        });
+//    });
 
     //// wechat
     //wx.config({
