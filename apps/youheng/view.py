@@ -11,7 +11,7 @@ tinify.key = "5yQ9zoNVE6mG9wFfbAUGWHF3T5KLN5AC"
 from apps.main.Result import Result
 from sqlalchemy import desc
 import xlrd
-from apps.main.models import YouhengDuyao,Question,App
+from apps.main.models import YouhengDuyao,Question,App,AppSchema
 from apps.core import db,photos
 
 
@@ -39,15 +39,21 @@ def index():
 
 @mod.route('download')
 def download():
-    androidApp = App.query.filter(App.name == 'Android').order_by(desc('time_creat')).first()
-    iosApp = App.query.filter(App.name == 'IOS').order_by(desc('time_creat')).first()
-    return render_template('youheng.html', androidApp=androidApp, iosApp=iosApp)
+    try:
+        androidApp = App.query.filter(App.name == 'Android').first()
+        iosApp = App.query.filter(App.name == 'IOS').first()
+
+        return render_template('youheng.html', androidApp=androidApp, iosApp=iosApp)
+    except:
+        db.session.rollback()
+        androidApp = App.query.filter(App.name == 'Android').first()
+        iosApp = App.query.filter(App.name == 'IOS').first()
+        return render_template('youheng.html', androidApp=androidApp, iosApp=iosApp)
 
 
 @mod.route('upload', methods=['POST'])
 def upload():
     if 'image' in request.files:
-
         file = request.files.get('image')
         filename = uuid.uuid4().hex + file.filename[file.filename.find('.'):]
         photos.save(file, name=filename)
@@ -96,7 +102,7 @@ def udid():
             yhUdidNew.id = id
             yhUdidNew.time_creat = datetime.datetime.now()
             yhUdidNew.add()
-            return render_template('success.html', msg='提交成功')
+            return render_template('success.html', msg='提交成功，请等待工程师为您打包APP，群内发送安装连接！请您耐心等待')
 
         dataStr = request.data.decode('iso-8859-1')
         udid = dataStr[dataStr.find('<string>') + 8:dataStr.find('</string>')]
@@ -119,7 +125,7 @@ def wechat():
     return '<html><body><img src=\"./QR.png\"/></body></html>'
 
 
-@mod.route('/shorturl')
+@mod.route('shorturl')
 def shortUrl():
     url = request.values['url']
     if url is None:
@@ -130,6 +136,11 @@ def shortUrl():
         if len(json) > 0:
             return jsonify(json[0])
         return '错误'
+
+@mod.route('update')
+def update():
+    iosApp = App.query.filter(App.name == 'IOS').first()
+    return jsonify(Result(200,'success',json.loads(AppSchema().dumps(iosApp).data)).__dict__)
 
 
 @mod.route('/search')

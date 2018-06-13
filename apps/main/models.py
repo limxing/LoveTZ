@@ -83,8 +83,10 @@ class App(db.Model):
     uuid = db.Column(db.String(32), default=gen_id, primary_key=True)
     size = db.Column(db.String(32))
     version = db.Column(db.String(32))
+    build = db.Column(db.Integer)
     url = db.Column(db.String(128))
     name = db.Column(db.String(16))
+    describe = db.Column(db.String(128))
 
     time_creat = db.Column(db.DateTime)
     time_update = db.Column(db.DateTime)
