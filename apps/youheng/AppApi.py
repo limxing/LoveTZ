@@ -14,13 +14,16 @@ class AppApi(AuthRequest):
         return jsonify(Result(200, 'success', json.loads(AppSchema().dumps(App.query.order_by(desc('time_creat')).all(),many=True).data)).__dict__)
 
     def post(self):
-        name = request.values.get('name')
+        dictApp = request.get_json(cache=False)
+        name = dictApp['name']
         if name:
             app = App()
             app.name = name
-            app.size = request.values.get('size')
-            app.version = request.values.get('version')
-            app.url = request.values.get('url')
+            app.size = dictApp['size']
+            app.version = dictApp['version']
+            app.url = dictApp['url']
+            app.build = dictApp['build']
+            app.describe = dictApp['describe']
             app.time_update = datetime.datetime.now()
             app.time_creat = datetime.datetime.now()
             app.add()
@@ -28,12 +31,15 @@ class AppApi(AuthRequest):
         return jsonify(Result(201, '失败', '').__dict__)
 
     def put(self):
-        app = App.query.get(request.values.get('uuid'))
+        dictApp = request.get_json(cache=False)
+        app = App.query.get(dictApp['uuid'])
         if app:
-            app.name = request.values.get('name')
-            app.size = request.values.get('size')
-            app.version = request.values.get('version')
-            app.url = request.values.get('url')
+            app.name = dictApp['name']
+            app.size = dictApp['size']
+            app.version = dictApp['version']
+            app.url = dictApp['url']
+            app.build = dictApp['build']
+            app.describe = dictApp['describe']
             app.time_update = datetime.datetime.now()
             app.save()
             return jsonify(Result(200, 'success', '').__dict__)
