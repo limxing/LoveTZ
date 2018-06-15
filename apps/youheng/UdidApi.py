@@ -1,4 +1,4 @@
-
+from sqlalchemy import desc
 from flask import jsonify,g,request,make_response,redirect,render_template
 import logging
 from apps.main.Result import Result
@@ -12,7 +12,7 @@ class UdidApi(AuthRequest):
 
     def get(self):
         return jsonify(
-            Result(200, '', json.loads(YouhengUdidSchema().dumps(YouhengUdid.query.order_by('time_creat').all(), many=True).data)).__dict__)
+            Result(200, '', json.loads(YouhengUdidSchema().dumps(YouhengUdid.query.order_by(desc('time_creat')).all(), many=True).data)).__dict__)
 
     def delete(self):
 
