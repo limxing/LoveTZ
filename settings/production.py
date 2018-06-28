@@ -34,8 +34,8 @@ class ProductionConfig(BaseConfig):
             'func': 'apps.connect_mysql:morning',
             'args': None,
             'trigger': 'cron',
-            'hour': 7,
-            'minute': 0,
+            'hour': 8,
+            'minute': 30,
             'second': 0
         }
     ]
