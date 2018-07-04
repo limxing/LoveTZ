@@ -79,7 +79,8 @@ def udid():
     if method == 'GET':
         udid = request.args.get('udid')
         if not udid:
-            return render_template('udid.html')
+            # return render_template('udid.html')
+            return "内测名额已满，请先使用网页版<br/><a href='https://card.youheng-inc.com/'>https://card.youheng-inc.com/</a>"
         return render_template('udid_c.html', udid=udid)
 
     elif method == 'POST':
