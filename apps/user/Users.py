@@ -49,7 +49,7 @@ class Users(object):
             # except:
             #     db.session.rollback()
             #     return json.dumps(Result(501, '登录失败，重新登录', None))
-        token = 'token '+user_db.generate_auth_token().decode('ascii')
+        token = 'token ' + user_db.generate_auth_token().decode('ascii')
 
         mi = json.loads("{\"appId\":" + str(
             appId) + ",\"appKey\":\"" + appKey + "\",\"appSecret\":\"" + appSecret + "\",\"url\":\"" + url + "\"}")

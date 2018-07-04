@@ -1,17 +1,17 @@
 from apps.main.models import YouhengDuyao, DuyaoSchema
-from flask import jsonify,g,request
+from flask import jsonify, g, request
 from apps.main.Result import Result
 import json
-from apps.base.BaseRequest import BaseRequest,AuthRequest
+from apps.base.BaseRequest import BaseRequest, AuthRequest
 import datetime
 from sqlalchemy import desc
 
+
 class YouhengApi(AuthRequest):
-
-
     def get(self):
         isM = request.values.get('isM')
-        duYao = YouhengDuyao.query.filter_by(type=isM).order_by(YouhengDuyao.isSend, desc(YouhengDuyao.time_creat), desc(YouhengDuyao.time_send)).all()
+        duYao = YouhengDuyao.query.filter_by(type=isM).order_by(YouhengDuyao.isSend, desc(YouhengDuyao.time_send),
+                                                                desc(YouhengDuyao.time_creat)).limit(30)
 
         return jsonify(Result(200, '', json.loads(DuyaoSchema().dumps(duYao, many=True).data)).__dict__)
 
@@ -41,4 +41,3 @@ class YouhengApi(AuthRequest):
         duyao.save()
 
         return jsonify(Result(200, "修改成功", None).__dict__)
-
