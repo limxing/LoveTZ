@@ -36,20 +36,7 @@
 
     </style>
     <script type="text/javascript">
-        window.onload = function () {
-            var ua = navigator.userAgent.toLowerCase();
-            console.log(ua);
 
-            if (/safari/.test(ua) && !/chrome/.test(ua)) {
-                isIos = true;
-                document.getElementById("wechat").style.display="none";
-
-            } else {
-                alert("iPhone手机专用");
-                document.getElementById("trans").style.overflow = "hidden";
-                document.getElementById("trans").style.height = "100%";
-            }
-        };
     </script>
 </head>
 
@@ -70,7 +57,7 @@
 <!--=== Content Part ===-->
 <div class="container content" >
 
-    <div class="span12 margin-bottom-30 appicon-mobile" id="appicon-bg">
+    <div class="span12 margin-bottom-10 appicon-mobile" id="appicon-bg">
         <a href="javascript:void(0);"><img
                 src="https://o1wh05aeh.qnssl.com/image/view/app_icons/2af5de2ef74c883c63623a6f804d6f7f/120"
                 class="appicon"
@@ -88,8 +75,7 @@
         <div class="" style="margin-top:20px;">
             <div class="span12 margin-bottom-20" style="text-align:center;">
                 <div class="spinner">
-                    <div id="showtext">正在安装，请按 Home 键在桌面查看</div>
-                    <div class="loading"></div>
+
                     <a href="https://card.youheng-inc.com/" id="down_load" class="btn-u btn-u-lg ">
 
                         打开网页版 </a>
@@ -130,9 +116,6 @@
 
         </div><!--/row-fluid-->
     </div><!--/container-->
-</div>
-<div id="wechat" class="trans">
-    <img  style="width: 70%" src="../static/img/ios_browser_tips.png">
 </div>
 </body>
 

@@ -71,7 +71,7 @@ def image(name):
     return photos.url(name)
 
 
-@mod.route('udid', methods=['GET'])
+@mod.route('udid_vip', methods=['GET'])
 def udid_vip():
     return render_template('udid.html')
 
